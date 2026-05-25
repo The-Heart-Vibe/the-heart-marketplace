@@ -92,9 +92,87 @@ Jeśli któryś **wymagany** dla Twojego profilu `FAIL`:
 
 | Provider | Komenda | Co da |
 |----------|---------|-------|
-| `gemini-cli` FAIL | `gemini` (otworzy przeglądarkę → OAuth Google Workspace) | Council używa Gemini |
+| `gemini-cli` FAIL | Patrz **3a. Gemini CLI login** niżej | Council używa Gemini |
 | `codex` FAIL (tech) | `codex login` (wymaga ChatGPT Plus/Pro) | Council używa GPT-5 |
 | `claude` FAIL | Normal jeśli odpalasz z CC session | Self-invocation block — działa tylko z terminala spoza CC |
+
+### 3a. Gemini CLI login — krok po kroku
+
+**Pre-requisites:**
+- Node.js zainstalowane (`node --version` powinien coś zwrócić). Jeśli nie — instalacja z https://nodejs.org/ (LTS) lub `brew install node` na Mac
+- Konto @theheart.tech aktywne w Workspace
+
+**Krok 1: Zainstaluj Gemini CLI**
+
+(heart-vb installer już to robi; jeśli nie — odpal ręcznie)
+```bash
+npm install -g @google/gemini-cli
+```
+
+Mac "permission denied" → użyj `sudo npm install -g @google/gemini-cli`.
+
+**Krok 2: Login**
+
+```bash
+gemini
+```
+
+(uruchamia się **bez argumentów** w trybie interaktywnym)
+
+Co się dzieje:
+1. Terminal wyświetli "Opening browser for authentication..." + URL
+2. Otworzy się przeglądarka na stronie Google
+3. **Wybierz konto @theheart.tech** (jeśli masz multiple kont — kliknij właściwe)
+4. Strona spyta o uprawnienia dla "Gemini CLI" → kliknij **Continue / Allow**
+5. Zobaczysz "Authentication successful" w przeglądarce
+6. Wracasz do terminala → Gemini CLI gotowy
+
+**Krok 3: Weryfikacja**
+
+```bash
+council doctor
+```
+
+Powinieneś zobaczyć:
+```
+│ gemini-cli  │ OK     │ CLI available (auth: oauth-personal) │
+```
+
+Plus szybki live test (krótki call):
+```bash
+gemini -p "Powiedz cześć po polsku"
+```
+Odpowiedź = działa. Brak odpowiedzi po >15s → patrz troubleshooting niżej.
+
+**Troubleshooting Gemini login:**
+
+| Problem | Rozwiązanie |
+|---------|-------------|
+| `gemini: command not found` | npm global bin nie w PATH — dodaj `export PATH="$(npm root -g)/../bin:$PATH"` do `~/.zshrc` |
+| Browser nie otwiera się | Skopiuj URL z terminala i wklej ręcznie do przeglądarki |
+| "This app isn't verified by Google" | Klikaj **Advanced → Continue to Gemini CLI (unsafe)** — to oficjalne Google narzędzie, ten warning to standardowa procedura dla CLI tools |
+| Workspace admin zablokował third-party apps | Napisz do IT @theheart.tech żeby allowlist'ował "Gemini CLI" (`@google/gemini-cli`) — to oficjalne narzędzie Google |
+| Wrong account wybrane podczas OAuth | Wyloguj się ze wszystkich kont na https://accounts.google.com, potem `gemini` jeszcze raz |
+| Re-login po dłuższym czasie (rzadko potrzebne) | `gemini` ponownie — overwrite'uje auth file |
+| `Gemini CLI timed out after 5s` w `council doctor --deep` | Normal — Gemini ma cold start ~7-15s. Dla rzeczywistych council runs używaj `--timeout 600` przy Tier L+ |
+
+**Co się dzieje pod spodem** (informacyjnie):
+
+Po login powstaje plik `~/.gemini/settings.json` z:
+```json
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  }
+}
+```
+
+Token odświeża się automatycznie — nie musisz logować się ponownie miesiącami. Sprawdź obecność:
+```bash
+cat ~/.gemini/settings.json
+```
 
 ### Po setupie — sprawdź config
 
