@@ -10,6 +10,84 @@ description: Multi-LLM debate via the-llm-council CLI. Invoke ONLY when user exp
 
 ---
 
+## Architektura: Claude jako uczestnik i finalny syntezator
+
+Council działa w 3 fazach wewnętrznie (draft → critique → synthesis). Claude uczestniczy jako:
+- **blind drafter** przed uruchomieniem council
+- **finalny syntezator** po otrzymaniu wyników — bo ma pełny kontekst sesji
+
+Gemini i Codex widzą pre-vote Claude'a jako kontekst (`--files`) i mogą go skrytykować.
+Claude jest blind względem nich — pisze swoją ocenę zanim zobaczy ich odpowiedzi.
+
+```
+KROK 1 — Claude blind pre-vote
+  Claude formułuje ocenę → /tmp/claude-pre-vote.md
+  (bez znajomości odpowiedzi Gemini/Codex)
+
+KROK 2 — council run --files /tmp/claude-pre-vote.md
+  ├── Gemini draft   (widzi pre-vote Claude'a, może polemizować)
+  ├── Codex draft    (widzi pre-vote Claude'a, może polemizować)
+  ├── Gemini critique (krytykuje wszystkie drafty w tym głos Claude'a)
+  └── Codex synthesis (wewnętrzna synteza council)
+
+KROK 3 — Claude finalna synteza
+  Ma: własny pre-vote + drafty Gemini/Codex + krytykę + syntezę council
+  → Prezentuje finalny werdykt użytkownikowi
+```
+
+### KROK 1 — Format pre-vote Claude'a
+
+> **Tier S = pomijaj pre-vote** — solo Gemini, zbyt małe zadanie żeby warto było.
+> **Tier M/L/XL = zawsze pre-vote** przed wywołaniem council.
+
+Sformułuj ocenę w tekście, a następnie użyj **Write tool** żeby zapisać do pliku:
+
+```
+Write(
+  file_path="/tmp/claude-pre-vote.md",
+  content="🧠 Claude (pre-vote, blind):\nRekomendacja: [decyzja]\nScore: [X/10]\nConfidence: [X%]\nKluczowe argumenty:\n1. ...\n2. ...\n3. ...\nKontekst sesji który Gemini/Codex nie mają: [...]"
+)
+```
+
+**NIE** używaj bash heredoc — Write tool jest właściwą metodą.
+
+### KROK 2 — Wywołanie council z pre-vote jako kontekstem
+
+Do każdej komendy council dodaj `--files /tmp/claude-pre-vote.md`:
+
+```bash
+~/.local/bin/council run drafter --mode impl "<zadanie>" \
+  --providers gemini-cli,codex \
+  --files /tmp/claude-pre-vote.md \
+  --runtime-profile bounded --reasoning-profile light --json
+```
+
+### KROK 3 — Finalna synteza Claude'a
+
+Po otrzymaniu JSON z council, Claude syntetyzuje wszystko:
+- Zacytuj explicite stanowisko każdego z trzech (Claude, Gemini, Codex)
+- Jeśli pre-vote Claude'a różnił się od tego co wróciło — napisz wprost czy zmieniasz zdanie i dlaczego
+- Rozbieżności między modelami są informacją, nie błędem — pokaż je
+- Masz przewagę: znasz kontekst całej sesji — użyj tego w syntezie
+
+### Format finalnego outputu
+
+```
+🏛️ Council [tier L] · claude + gemini-cli + codex · 87s
+
+Claude (blind pre-vote):  SSE  8.2/10  "serwer→klient, brak WS"
+Gemini:                   SSE  7.8/10  "zgoda, Redis Pub/Sub wymagany"
+Codex:                    WS   6.9/10  "polemika: client też inicjuje"
+
+Werdykt: SSE (avg 7.6)
+Gemini skrytykował głos Claude'a: [co zakwestionował]
+Claude po council: podtrzymuję / zmieniam zdanie bo [...]
+
+Warunki: ...
+```
+
+---
+
 ## ⚠️ KRYTYCZNE ograniczenia (przeczytaj zanim odpalisz)
 
 ### 1. Provider `claude` NIE działa z poziomu Claude Code session
@@ -138,26 +216,34 @@ nie opiniach."
 ```bash
 ~/.local/bin/council run drafter --mode impl "<zadanie>" \
   --providers gemini-cli,codex \
+  --files /tmp/claude-pre-vote.md \
   --runtime-profile bounded --reasoning-profile light --json
 
 ~/.local/bin/council run critic --mode review "<co reviewować>" \
   --providers gemini-cli,codex \
+  --files /tmp/claude-pre-vote.md \
   --runtime-profile bounded --reasoning-profile light --json
 ```
 
 ### TECH — Tier L
 ```bash
 ~/.local/bin/council run planner --mode assess "<decyzja>" \
-  --providers gemini-cli,codex --timeout 300 --json
+  --providers gemini-cli,codex \
+  --files /tmp/claude-pre-vote.md \
+  --timeout 300 --json
 
 ~/.local/bin/council run drafter --mode arch "<architektura>" \
-  --providers gemini-cli,codex --timeout 300 --json
+  --providers gemini-cli,codex \
+  --files /tmp/claude-pre-vote.md \
+  --timeout 300 --json
 ```
 
 ### TECH — Tier XL
 ```bash
 ~/.local/bin/council run critic --mode security "<co audytować>" \
-  --providers gemini-cli,codex --timeout 300 --json
+  --providers gemini-cli,codex \
+  --files /tmp/claude-pre-vote.md \
+  --timeout 300 --json
 ```
 
 ---
@@ -176,11 +262,13 @@ nie opiniach."
 ~/.local/bin/council run critic --mode review "<co review>" \
   --providers gemini-cli,codex \
   --context "<PERSONA z library powyżej>" \
+  --files /tmp/claude-pre-vote.md \
   --runtime-profile bounded --reasoning-profile light --json
 
 ~/.local/bin/council run researcher "<temat research>" \
   --providers gemini-cli,codex \
   --context "<PERSONA z library>" \
+  --files /tmp/claude-pre-vote.md \
   --runtime-profile bounded --json
 ```
 
@@ -189,11 +277,13 @@ nie opiniach."
 ~/.local/bin/council run planner --mode assess "<decyzja biznesowa>" \
   --providers gemini-cli,codex \
   --context "<PERSONA: product strategist / pricing analyst / growth lead>" \
+  --files /tmp/claude-pre-vote.md \
   --timeout 300 --json
 
 ~/.local/bin/council run planner --mode plan "<plan launch/kampania>" \
   --providers gemini-cli,codex \
   --context "<PERSONA>" \
+  --files /tmp/claude-pre-vote.md \
   --timeout 300 --json
 ```
 
@@ -204,6 +294,7 @@ nie opiniach."
   --context "Jesteś VP product / Head of Marketing w B2B SaaS. 
              Oceniaj w horyzoncie 12-18mc. Uwzględnij: market timing, 
              org readiness, resource trade-offs, opportunity cost." \
+  --files /tmp/claude-pre-vote.md \
   --timeout 600 --json
 ```
 
@@ -228,21 +319,35 @@ Limit: 50KB/plik, 200KB łącznie.
 
 ## Jak prezentować wynik (CRITICAL)
 
-Po `council run` parsuj JSON i zwróć użytkownikowi **maksymalnie 15 linii**:
+Po `council run` parsuj JSON i zwróć użytkownikowi **maksymalnie 15 linii**.
+
+**Tier M/L/XL** — zawsze pokaż trzy głosy + finalną syntezę Claude'a:
 
 ```
-🏛️ Council [tier L] · gemini-cli + codex · 87s
+🏛️ Council [tier L] · claude + gemini-cli + codex · 87s
+
+Claude (blind):  SSE  8.2/10  "serwer→klient, Redis wymagany"
+Gemini:          SSE  7.8/10  "zgoda, dodał: LB idle_timeout"
+Codex:           WS   6.9/10  "polemika: client też inicjuje"
+
+Werdykt: SSE (avg 7.6, confidence 84%)
+Gemini zakwestionował głos Claude'a: [co zakwestionował]
+Claude po council: podtrzymuję / zmieniam zdanie bo [...]
+
+Warunki:
+1. server→client only — jeśli klient odpowiada, użyj WS
+2. Redis Pub/Sub przy multi-node
+3. LB: idle_timeout >300s, proxy_buffering off
+```
+
+**Tier S** (solo Gemini, brak pre-vote) — skrócony format:
+
+```
+🏛️ Council [tier S] · gemini-cli · 12s
 
 **Werdykt:** SSE (confidence: 84%, score 8.06/10)
-
-**Warunki:**
-1. server→client only — jeśli klient ma odpowiadać, użyj WS
-2. Redis Pub/Sub przy multi-node deployment
-3. LB: idle_timeout >300s, proxy_buffering off
-
+**Warunki:** 1. ... 2. ... 3. ...
 **Top alternatywy:** WebSockets (7.2), Polling (5.4)
-
-Artifact: <ścieżka jeśli istnieje>
 ```
 
 **NIE** wklejaj:
