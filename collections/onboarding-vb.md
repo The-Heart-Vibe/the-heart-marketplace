@@ -19,7 +19,7 @@ Jeden plugin `heart-vb` zawiera **30 skilli** w 8 kategoriach:
 | **vb-finance** | financial-analyst, saas-metrics-coach | Unit economics, P&L, KPIs, projekcje |
 | **vb-commercial** | pricing-strategist, deal-desk, commercial-forecaster, channel-economics | Pricing, deal screening, GTM forecasts |
 | **vb-comms** | board-prep (IC memo), stress-test, hard-call, investor-materials, investor-outreach | IC memo, pitch deck, investor comms |
-| **heart-custom** | heart-fintech-compliance, heart-healthtech-compliance, heart-realestate-context, heart-martech-ecosystem | Sector context dla portfolio (KNF/MDR/RODO/polskie specyfiki) |
+| **heart-custom** | heart-healthtech-compliance ⭐, heart-academic-spinouts ⭐, heart-energy-storage ⭐, heart-fintech-compliance (legacy) | Sector context reflektujące focus 2026 (HealthTech, uczelnie, magazyny energii) |
 
 ➡️ Pełna mapa skilli per faza pracy: [venture-builder.md](venture-builder.md)
 
@@ -199,12 +199,12 @@ Po prostu **pisz normalnie** do Claude. Hook wykrywa intent i Claude sugeruje w�
 |------------------|-------------|-------------------|
 | "cześć, jak się masz?" | ❌ nie fires | – |
 | "Zbadaj TAM dla AML SaaS w CEE banking" | research | deep-research / market-research / exa-search |
-| "Zbuduj unit econ MarTech: ARPU €49, CAC €600" | modeling | financial-analyst / saas-metrics-coach |
+| "Zbuduj unit econ HealthTech telemedycyna: ARPU €120, CAC €1200" | modeling | financial-analyst / saas-metrics-coach |
 | "Napisz IC memo dla projektu X" | writing | board-prep / investor-materials |
 | "Pricing $99/$299/$999 vs flat $2k — co wybrać?" | decision + pricing | /council Tier L + pricing-strategist |
-| "Zaprojektuj fake door experiment dla brokerów RE" | validation | experiment-designer / ux-researcher-designer |
-| "Profesor z patentem — fit dla nas?" | screening | deal-desk + heart-custom contexts |
-| "Pricing FinTech B2B SaaS dla mid-market PL banków" | decision + pricing + sector | council + pricing-strategist + heart-fintech-compliance |
+| "Zaprojektuj fake door experiment dla DSO managerów (BMS storage)" | validation | experiment-designer / ux-researcher-designer + heart-energy-storage |
+| "Profesor z PAN + patent biomarker — fit dla Heart?" | screening | deal-desk + heart-academic-spinouts |
+| "Pricing dla BESS Storage-as-a-Service dla industrial PL" | decision + pricing + sector | council + pricing-strategist + heart-energy-storage |
 
 ### Skip hook na konkretnej wiadomości
 
@@ -313,7 +313,7 @@ Wykonaj te 5 w pierwszym tygodniu — każde używa **innego skilla** + ostatnie
 - Claude pyta o oba, zgadzasz się, dostajesz strukturalny report bez wypalonych tokenów na shell HTML
 
 ### Zadanie 2: Modeling — konwersacyjnie (~20 min)
-> Zbuduj unit economics dla MarTech SaaS: ARPU €49/mo, GM 78%, CAC €600 z paid+content mix, 4% monthly churn. Pokaż LTV, payback, contribution margin month-on-month. Wytłumacz mi też dlaczego payback period to ważniejsze niż LTV/CAC w naszej fazie.
+> Zbuduj unit economics dla HealthTech SaaS B2B sprzedawanego do przychodni: ARPU €450/mo per practice, GM 72% (z kosztem clinical advisory), CAC €4200 z account-based marketing + branżowe konferencje, 6% rocznego churn (długie kontrakty). Pokaż LTV, payback, contribution margin month-on-month. Wytłumacz mi też dlaczego payback period jest ważniejsze niż LTV/CAC w naszej fazie.
 
 **Oczekiwany flow:** vb-suggest fires (modeling) → sugeruje `saas-metrics-coach` → odpowiada strukturalnie + wyjaśnia kontekst pro-konwersacyjnie. Nie ma file edits — tylko chat.
 

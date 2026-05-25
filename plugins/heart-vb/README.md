@@ -20,7 +20,7 @@ I masz wszystko. Bez dodawania innych marketplaces.
 | **vb-finance** | financial-analyst, saas-metrics-coach (unit economics, P&L, KPIs) | alirezarezvani (MIT) |
 | **vb-commercial** | pricing-strategist, deal-desk, commercial-forecaster, channel-economics | alirezarezvani (MIT) |
 | **vb-comms** | board-prep (IC memo), stress-test, hard-call, investor-materials, investor-outreach | mixed (MIT) |
-| **heart-custom** | heart-fintech-compliance (KNF/AMLD), heart-healthtech-compliance (MDR/RODO art. 9), heart-realestate-context (polski RE market), heart-martech-ecosystem (Shopify/WooCommerce/Allegro) | The Heart Vibe |
+| **heart-custom** | heart-healthtech-compliance ⭐ (MDR/RODO art. 9), heart-academic-spinouts ⭐ (PAN/CTT/NCBR), heart-energy-storage ⭐ (PSE/DSO/EU Battery Reg), heart-fintech-compliance (KNF/AMLD — legacy) — reflects 2026 focus | The Heart Vibe |
 
 **Total: 30 skilli.** Pełna lista [w plugin.json](.claude-plugin/plugin.json). Atrybucja w [skills/ATTRIBUTION.md](skills/ATTRIBUTION.md).
 
@@ -136,7 +136,7 @@ Hook klasyfikuje 6 intentów i sugeruje właściwy skill:
 | **writing** | "IC memo", "pitch deck", "term sheet" | board-prep, investor-materials |
 | **validation** | "JTBD", "interview", "fake door" | product-discovery, experiment-designer |
 | **screening** | "founder fit", "patent", "spin-out" | deal-desk, board-prep |
-| **+sector** | FinTech / HealthTech / RealEstate / MarTech | adds compliance reminder z heart-custom |
+| **+sector** | HealthTech / academic spinout / energy storage / FinTech (legacy) | adds compliance/context reminder z heart-custom |
 
 ### Opt-out per prompt (4 prefixy)
 
@@ -173,14 +173,14 @@ Pełna referencja: [skills/self-improving/self-improving-agent/SKILL.md](skills/
 
 ## Heart-custom skills
 
-4 sector-specific contexty pisane pod portfolio The Heart:
+4 sector-specific contexty reflektujące **aktualny focus Heart 2026**:
 
-- **heart-fintech-compliance** — KNF, AMLD6, MIFID2, PSD2, RODO. Use case: VASBOX, Digital Gateways
-- **heart-healthtech-compliance** — MDR, RODO art. 9, NFZ procurement, IRB approval. Use case: Wellnoted
-- **heart-realestate-context** — polski rynek RE (OtoDom/Morizon, regionalność, brokerzy). Use case: Flatte, HomeAlert
-- **heart-martech-ecosystem** — Shopify/WooCommerce/Allegro, polski SME e-commerce. Use case: UniPerks
+- **heart-healthtech-compliance** ⭐ — MDR, RODO art. 9, NFZ procurement, IRB approval. Use case: Wellnoted + new HealthTech ventures
+- **heart-academic-spinouts** ⭐ — PAN/AGH/PW/PWr/UW/UJ/WUM, IP transfer z CTT, NCBR Szybka Ścieżka/LIDER/Bridge Alpha, NCN, FENG, IP Box. Use case: ventures budowane z polskimi uczelniami
+- **heart-energy-storage** ⭐ — PSE/DSO sales, EU Battery Regulation 2023/1542, capacity market, BESS business models (Storage-as-a-Service, aggregation, hardware). Use case: magazyny energii, V2G, cleantech
+- **heart-fintech-compliance** — KNF, AMLD6, MIFID2, PSD2, RODO, DORA. Use case: VASBOX, Digital Gateways (legacy portfolio)
 
-Loaderzy `--context` dla council + standalone reference podczas IC memo.
+Loaderzy `--context` dla council + standalone reference podczas IC memo. **Dla sektorów spoza tej listy** (EdTech, Defense, AgriTech, etc.) — persona alone wystarczy (patrz Pattern E w heart-orchestrate).
 
 ## Diagnostyka
 

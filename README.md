@@ -43,7 +43,7 @@ Wszystkie z licencją MIT. Atrybucja w każdym SKILL.md i w [ATTRIBUTION.md](plu
 
 - [alirezarezvani/claude-skills](https://github.com/alirezarezvani/claude-skills) — product-team, finance, commercial, c-level-advisor, engineering-team subdirs
 - [affaan-m/everything-claude-code](https://github.com/affaan-m/everything-claude-code) — research + investor skills
-- Heart-custom — sektor-specific context dla FinTech/HealthTech/RealEstate/MarTech (nasze)
+- Heart-custom — sektor-specific context dla HealthTech / Academic spinouts / Energy storage / FinTech (legacy) — reflecting current portfolio focus 2026
 
 Nie auto-syncujemy z upstream — update wymaga ręcznego re-copy + diff review (PR mile widziane).
 

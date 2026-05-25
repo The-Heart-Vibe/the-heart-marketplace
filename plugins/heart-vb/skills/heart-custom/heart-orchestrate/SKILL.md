@@ -51,7 +51,7 @@ description: |
 Wyciągnij listę N entities z prompta:
 ```
 "przebadaj 5 konkurentów AML" → N=5, entities = ["Actico", "Compliance Corp", ...]
-"base/bull/bear case dla MarTech SaaS" → N=3, entities = ["base", "bull", "bear"]
+"base/bull/bear case dla BESS energy storage venture" → N=3, entities = ["base", "bull", "bear"]
 "napisz IC memo z sekcjami" → N=4-6, entities = ["thesis", "market", "financials", "risks", "team", "ask"]
 ```
 
@@ -70,7 +70,7 @@ Agent({
            tech stack, kluczowe słabości. Jeśli pricing page jest JS-heavy
            użyj chrome-devtools-mcp z evaluate_script.
            
-           Sector context: [załącz odpowiedni heart-* skill jeśli FinTech/HealthTech/RE/MarTech]
+           Sector context: [załącz odpowiedni heart-* skill jeśli HealthTech / academic spinout / energy storage / FinTech legacy]
            
            Zwróć structured output:
            - Name + URL
@@ -160,7 +160,7 @@ Trigger: "scan landscape", "porównaj sektory", "4 sektory"
 Main (Opus):
   1. Define sectors + criteria framework
   2. SPAWN 4 agents (sonnet, parallel):
-     each: market-research + deep-research + sector context (heart-fintech/health/real-estate/martech)
+     each: market-research + deep-research + sector context (heart-healthtech/academic-spinouts/energy-storage/fintech-legacy)
   3. Synthesize: cross-sector heat map, where Heart has best fit
 ```
 
@@ -173,7 +173,7 @@ Trigger: decision intent (pricing, GTM, build/buy) + profil ANALITYK (gemini-cli
 - **N spawned workers (sonnet)** = każdy wywołuje `gemini-cli` przez Bash z **inną PERSONĄ** (sector context to opcjonalny dodatek)
 - **Main synthesize** = Claude widzi N gemini perspektyw + ma własną → "effectively 4-LLM debate" bez Codex
 
-**Kluczowe:** **PERSONA jest primary**, sector context to opcjonalny dodatek. Heart pracuje w wielu sektorach (portfolio + corporate VB partnerships) — większość sectors nie jest pre-zdefiniowana w `heart-*-compliance` skillach. Persona reuses across sectors, sector context jest tylko gdy mamy dedykowany skill (FinTech/HealthTech/RealEstate/MarTech z Heart portfolio).
+**Kluczowe:** **PERSONA jest primary**, sector context to opcjonalny dodatek. Heart pracuje w wielu sektorach (portfolio + corporate VB partnerships + research commercialization) — większość sectors nie jest pre-zdefiniowana w `heart-*` skillach. Persona reuses across sectors, sector context jest tylko gdy mamy dedykowany skill (HealthTech / academic spinouts / energy storage / FinTech legacy — patrz Sector context niżej).
 
 ```
 Main (Opus, "Twoja perspektywa Claude"):
@@ -227,13 +227,13 @@ Persony pasują **do każdego sektora**. Wybierz 3 adekwatne do typu decyzji:
 
 ### Sector context — OPCJONALNY add-on
 
-Mamy 4 sector contexts w `heart-custom/` które dodaję się DO persony (NIE zastępują):
-- `heart-fintech-compliance` (gdy Heart portfolio FinTech: VASBOX, Digital Gateways)
-- `heart-healthtech-compliance` (gdy HealthTech: Wellnoted)
-- `heart-realestate-context` (gdy Real Estate: Flatte, HomeAlert)
-- `heart-martech-ecosystem` (gdy MarTech: UniPerks)
+Mamy 4 sector contexts w `heart-custom/` reflektujące **focus Heart 2026** (dodaję się DO persony, NIE zastępują):
+- `heart-healthtech-compliance` ⭐ (Wellnoted + new HealthTech ventures — main focus)
+- `heart-academic-spinouts` ⭐ (ventures budowane z polskimi uczelniami / instytutami PAN)
+- `heart-energy-storage` ⭐ (magazyny energii, BESS, V2G, cleantech)
+- `heart-fintech-compliance` (VASBOX, Digital Gateways — legacy portfolio)
 
-**Reguła:** sector context dodaję się tylko jeśli decyzja DOTYCZY portfolio sektora. Dla NEW sectors (np. EdTech, Energy, Manufacturing) Heart pracuje bez dedykowanego skilla — persona alone jest wystarczająca, opcjonalnie z explicit "industry expert in <X>" w prompt persona.
+**Reguła:** sector context dodaję się tylko jeśli decyzja DOTYCZY portfolio sektora. Dla **innych sektorów** (np. EdTech, Defense, AgriTech, Industrial automation) Heart pracuje bez dedykowanego skilla — persona alone jest wystarczająca, opcjonalnie z explicit "industry expert in <X>" w prompt persona.
 
 ### Przykład — pricing decision dla VASBOX (FinTech, portfolio)
 

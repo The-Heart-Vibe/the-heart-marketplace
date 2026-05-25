@@ -99,10 +99,12 @@ PRICING_PAT=(
 )
 
 # SECTOR hints — adds context, doesn't trigger alone
+# Heart portfolio focus: HealthTech, Academic spinouts, Energy storage, FinTech (legacy)
 SECTOR_PAT=(
-  '\b(FinTech|HealthTech|MarTech|RealEstate|Real Estate)\b'
-  '\b(KNF|RODO|AMLD|MDR|NFZ|MIFID|PSD2)\b'
-  '\b(bank|przychodni|broker real estate|e[- ]commerce)\b'
+  '\b(FinTech|HealthTech|CleanTech|EnergyTech|energy storage|magazyn(y)? energii|BESS|grid storage|V2G)\b'
+  '\b(academic spinout|spin[- ]?out|tech transfer|uczelni|profesor|PAN|NCBR|NCN|patent|IP commercializ)\b'
+  '\b(KNF|RODO|AMLD|MDR|NFZ|MIFID|PSD2|EU Battery|CSRD|EU Taxonomy)\b'
+  '\b(bank|przychodni|klinika|szpital|PSE|TSO|DSO|PGE|Tauron|Enea|Energa)\b'
 )
 
 DEC_HITS=$(match_count "$PROMPT" "${DECISION_PAT[@]}")
@@ -159,17 +161,18 @@ if [ "$PRI_HITS" -ge 1 ]; then
   SKILLS="$SKILLS Bonus: pricing-strategy + comps-analysis dla benchmarków + council."
 fi
 
-# Sector hint adds compliance reminder
+# Sector hint adds compliance/context reminder for Heart portfolio sectors.
+# Dla nowych sektorów (nie ujętych poniżej) — persona alone wystarczy, Pattern E w heart-orchestrate.
 SECTOR_NOTE=""
 if [ "$SEC_HITS" -ge 1 ]; then
-  if printf '%s' "$PROMPT" | grep -qiE 'FinTech|KNF|AMLD|MIFID|PSD2|bank'; then
-    SECTOR_NOTE=" ⚠️ FinTech kontekst — uwzględnij compliance (KNF, AMLD6, MIFID2, PSD2, RODO)."
-  elif printf '%s' "$PROMPT" | grep -qiE 'HealthTech|MDR|NFZ|RODO art.?9|medycyn|klinicz'; then
-    SECTOR_NOTE=" ⚠️ HealthTech kontekst — uwzględnij MDR, RODO art. 9, IRB approval."
-  elif printf '%s' "$PROMPT" | grep -qiE 'RealEstate|Real Estate|nieruchom|broker'; then
-    SECTOR_NOTE=" ⚠️ Real Estate kontekst — lokalność rynku PL, OtoDom/Morizon partnerships."
-  elif printf '%s' "$PROMPT" | grep -qiE 'MarTech|e[- ]commerce|loyalty|Shopify'; then
-    SECTOR_NOTE=" ⚠️ MarTech kontekst — Shopify/WooCommerce ecosystem, agency distribution."
+  if printf '%s' "$PROMPT" | grep -qiE 'HealthTech|MDR|NFZ|RODO art.?9|medycyn|klinicz|szpital|przychodni|klinika'; then
+    SECTOR_NOTE=" ⚠️ HealthTech kontekst — załącz **heart-healthtech-compliance** (MDR, RODO art. 9, IRB approval, NFZ procurement)."
+  elif printf '%s' "$PROMPT" | grep -qiE 'academic spinout|spin[- ]?out|tech transfer|uczelni|profesor|PAN|NCBR|NCN|IP commercializ'; then
+    SECTOR_NOTE=" ⚠️ Academic spinout kontekst — załącz **heart-academic-spinouts** (IP ownership, NCBR/NCN funding paths, cooperation models z profesorami)."
+  elif printf '%s' "$PROMPT" | grep -qiE 'energy storage|magazyn(y)? energii|BESS|grid storage|V2G|PSE|TSO|DSO|EU Battery|CSRD'; then
+    SECTOR_NOTE=" ⚠️ Energy Storage kontekst — załącz **heart-energy-storage** (PSE/DSO sales, EU Battery Regulation, capacity market, BESS business models)."
+  elif printf '%s' "$PROMPT" | grep -qiE 'FinTech|KNF|AMLD|MIFID|PSD2|bank'; then
+    SECTOR_NOTE=" ⚠️ FinTech kontekst — załącz **heart-fintech-compliance** (KNF, AMLD6, MIFID2, PSD2, RODO, DORA)."
   fi
 fi
 

@@ -7,7 +7,7 @@
 2. **Founder partnerships** — building ventures z founderami przyprowadzającymi koncept
 3. **Corporate venture building** — partnerstwa z korporatami
 
-**Sektory portfolio:** FinTech (VASBOX, Digital Gateways), Real Estate (Flatte, HomeAlert), MarTech (UniPerks), HealthTech (Wellnoted).
+**Aktualny focus 2026:** **HealthTech** (Wellnoted), **academic spinouts** (ventures budowane z polskimi uczelniami/instytutami PAN), **energy storage / cleantech** (magazyny energii, BESS, V2G). FinTech (VASBOX, Digital Gateways) jako legacy portfolio.
 
 **Metodologia:** design thinking workshops → PoC → MVP → market.
 
@@ -89,15 +89,16 @@ Walidujesz hipotezy zanim wydasz $ na build. Różny workflow per typ venture:
 | `experiment-designer` | vb-product | Smoke test, fake door, MVP design |
 | `product-strategist` | vb-product | Positioning + narrative testing |
 
-**Przykładowy prompt — Real Estate validation:**
+**Przykładowy prompt — Energy storage venture validation:**
 ```
-Zaprojektuj fake-door experiment dla AI-powered apartment valuation 
-dla brokerów RE w Warszawie. Sample: 30 brokerów z 5 agencji. 
-Sukces criteria, czas trwania, sample size, jak skonstruować landing 
-po polsku z language relevant dla branży.
+Zaprojektuj fake-door experiment dla AI-driven battery management 
+system (BMS) dla industrial peak shaving. Target: 20 DSO/industrial 
+managerów w PL. Sukces criteria, czas trwania, sample size, jak 
+skonstruować landing po polsku z language relevant dla energetyki 
+(URE, capacity market, peak shaving ROI).
 ```
 
-→ Hook fires (validation + RE sector) → sugeruje `experiment-designer` + `heart-realestate-context`.
+→ Hook fires (validation + energy sector) → sugeruje `experiment-designer` + `heart-energy-storage`.
 
 ---
 
@@ -205,23 +206,23 @@ mitigations, ask (kwota + ekwity + 18-mc milestones).
 
 ## Sector addenda — heart-custom skills
 
-Pakiet zawiera 4 sector-specific loadery context. Używaj jako `--context` dla council lub jako standalone reference w IC memo.
+Pakiet zawiera 4 sector-specific loadery context reflektujące **aktualny focus 2026**. Używaj jako `--context` dla council/orchestrate workers lub jako standalone reference w IC memo. **Dla sektorów spoza tej listy** (np. EdTech, Defense, AgriTech) — persona alone wystarczy, Pattern E w heart-orchestrate.
 
-### `heart-fintech-compliance` (VASBOX, Digital Gateways)
+### `heart-healthtech-compliance` ⭐ (Wellnoted + new HealthTech ventures)
 
-KNF, AMLD6, MIFID2, PSD2, RODO, DORA. Sales cycle 9-18mc, often on-prem requirement. Vendor security questionnaire mandatory.
+MDR classification (zwykle IIa+), RODO art. 9 (dane szczególnych kategorii), IRB approval przed pilotem, NFZ procurement realities, integracje z systemem P1. **Główny focus Heart 2026.**
 
-### `heart-healthtech-compliance` (Wellnoted)
+### `heart-academic-spinouts` ⭐ (ventures budowane z polskimi uczelniami)
 
-MDR classification (zwykle IIa+), RODO art. 9 (dane szczególnych kategorii), IRB approval przed pilotem, NFZ procurement realities, integracje z systemem P1.
+PAN instytuty + AGH/PW/PWr/UW/UJ/WUM, IP ownership negotiations z CTT, funding paths (NCBR Szybka Ścieżka/LIDER/Bridge Alpha, NCN, FENG, EU Horizon EIC), cooperation models z academic founderami (CSO vs CEO splits), IP Box + Ulga B+R. **Coraz większy focus Heart — kluczowa ścieżka dla deep tech ventures.**
 
-### `heart-realestate-context` (Flatte, HomeAlert)
+### `heart-energy-storage` ⭐ (magazyny energii, BESS, V2G, cleantech)
 
-Polski rynek RE: dominujące portale (OtoDom, Morizon, Domiporta), regionalność (WAW ≠ KRK ≠ Trójmiasto), licencja RPI, niski digital adoption u brokerów.
+PSE/DSO sales realities (PGE/Tauron/Enea/Energa), EU Battery Regulation 2023/1542 compliance, capacity market participation, NFOŚiGW/EU Innovation Fund funding paths, BESS business models (Storage-as-a-Service, aggregation platforms, hardware+maintenance). **Nowy focus area 2026.**
 
-### `heart-martech-ecosystem` (UniPerks)
+### `heart-fintech-compliance` (VASBOX, Digital Gateways — legacy portfolio)
 
-Shopify/WooCommerce/Allegro ecosystem, polski SME e-commerce, distribution patterns (App Store, agency partnerships), niższy willingness-to-pay vs US/UK.
+KNF, AMLD6, MIFID2, PSD2, RODO, DORA. Sales cycle 9-18mc, often on-prem requirement, vendor security questionnaire mandatory. Legacy portfolio — utrzymujemy ale nie jest głównym fokusem 2026.
 
 ---
 

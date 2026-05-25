@@ -67,7 +67,6 @@ JS_HEAVY_DOMAINS=(
   'x\.com[/]'
   'facebook\.com'
   'instagram\.com'
-  'apps?\.shopify\.com'
   'app\.[a-z]+\.[a-z]{2,}'      # SaaS apps
   'dashboard\.[a-z]+\.[a-z]{2,}'
   'console\.[a-z]+\.[a-z]{2,}'
@@ -77,13 +76,29 @@ JS_HEAVY_DOMAINS=(
   'notion\.so'
   'figma\.com'
   'salesforce\.com'
-  'allegro\.pl[/].*-[0-9]'     # Allegro listings (dynamic)
-  'otodom\.pl'
-  'morizon\.pl'
   'rocketreach\.co'
   'apollo\.io'
   'sales\.navigator'
   'glassdoor\.com[/].*\.htm$'
+  # Heart portfolio sectors — research/academic sites (JS-heavy + multi-page typical)
+  'scholar\.google\.com'
+  'researchgate\.net'
+  'patents\.google\.com'
+  'espacenet\.com'
+  'lens\.org'
+  'pubmed\.ncbi'
+  'clinicaltrials\.gov'
+  'orcid\.org'
+  # Energy sector data portals (regulator/grid data, often dynamic)
+  'transparency\.entsoe\.eu'
+  'pse\.pl[/].*[a-z]{2,}'
+  'ure\.gov\.pl[/].*\.html'
+  'cire\.pl'
+  # PL funding/grant portals (research commercialization)
+  'gov\.pl/web/ncbr'
+  'ncbr\.gov\.pl'
+  'ncn\.gov\.pl'
+  'cinea\.ec\.europa\.eu'
 )
 
 # Interactive flow signals
