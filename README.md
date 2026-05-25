@@ -11,7 +11,7 @@ Wewnętrzny marketplace pluginów Claude Code dla zespołu The Heart Vibe.
 /plugin install heart-vb@the-heart-vibe
 ```
 
-I masz całą Venture Builder toolkit — 30 skilli w 8 kategoriach.
+I masz całą Venture Builder toolkit — 36 skilli w 8 kategoriach.
 
 Installer (~3 min) zapyta o opt-in Venture Builder hook → **odpowiedz `y`**.
 
@@ -21,7 +21,7 @@ Installer (~3 min) zapyta o opt-in Venture Builder hook → **odpowiedz `y`**.
 
 | Plugin | Co zawiera | Status |
 |--------|------------|--------|
-| [`heart-vb`](plugins/heart-vb) | **30 skilli** w 8 kategoriach: council (multi-LLM debate), self-improving (si:*), vb-research, vb-product, vb-finance, vb-commercial, vb-comms, heart-custom (sector contexts) | ✅ stable v0.2.0 |
+| [`heart-vb`](plugins/heart-vb) | **36 skilli** w 8 kategoriach: council (multi-LLM debate), self-improving (si:*), vb-research, vb-product, vb-finance, vb-commercial, vb-comms, heart-custom (sector contexts) | ✅ stable v0.5.0 |
 
 Pełna lista skilli w [plugins/heart-vb/.claude-plugin/plugin.json](plugins/heart-vb/.claude-plugin/plugin.json). Atrybucja upstream'ów: [plugins/heart-vb/skills/ATTRIBUTION.md](plugins/heart-vb/skills/ATTRIBUTION.md).
 
@@ -29,7 +29,7 @@ Pełna lista skilli w [plugins/heart-vb/.claude-plugin/plugin.json](plugins/hear
 
 | Kolekcja | Dla kogo | Co zawiera |
 |----------|----------|------------|
-| [Venture Builder map](collections/venture-builder.md) | Analitycy + konsultanci VB | Mapa 30 skilli na 7 faz pracy (discovery → IC) + sector addenda + token-saving practices |
+| [Venture Builder map](collections/venture-builder.md) | Analitycy + konsultanci VB | Mapa 36 skilli na 7 faz pracy (discovery → IC) + sector addenda + token-saving practices |
 | [Onboarding VB](collections/onboarding-vb.md) | Nowy teammate | Setup w 30 min: install, providery, hook, 3 praktyczne zadania |
 
 ## Co odróżnia od poprzedniej wersji (v0.1.0)

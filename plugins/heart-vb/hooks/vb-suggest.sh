@@ -137,28 +137,28 @@ if [ "$SCR_HITS" -gt "$PRIMARY_HITS" ]; then PRIMARY="screening"; PRIMARY_HITS=$
 
 case "$PRIMARY" in
   decision)
-    SKILLS="**/council** (Tier L) — multi-LLM debate dla decyzji. Lub jeśli to porównanie cech: critic --mode review."
+    SKILLS="**/council** Tier L (multi-LLM debate) lub **heart-orchestrate** Pattern E (lightweight council via main+workers). Dla porównania cech: critic --mode review."
     ;;
   research)
-    SKILLS="**deep-research**, **market-research** lub **competitive-teardown** — depending on scope. Browser tools (**chrome-devtools-mcp**) > WebFetch dla multi-page research, znacząco taniej."
+    SKILLS="**deep-research** (multi-step), **market-research** (TAM/SAM), **exa-search** (token-efficient) lub **competitive-teardown** (vendor rozbiór). Dla multi-page browser sources: **chrome-devtools-mcp** taniej niż WebFetch."
     ;;
   modeling)
-    SKILLS="**unit-economics** (CAC/LTV/payback) lub **3-statement-model** (P&L+cashflow). Dla valuation: **dcf-model** + **comps-analysis**. Council dopiero przy interpretacji wyników."
+    SKILLS="**saas-metrics-coach** (CAC/LTV/payback/churn/unit econ) lub **financial-analyst** (P&L + 3-statement + DCF valuation). Council dopiero przy interpretacji wyników."
     ;;
   writing)
-    SKILLS="**ic-memo** (dla IC The Heart), **pitch-deck** (dla inwestorów), **investor-materials** (one-pagery), lub **stakeholder-update** (regularne update'y)."
+    SKILLS="**board-prep** (IC memo), **heart-pitch-deck** (deck inwestorski 10-12 slide), **investor-materials** (one-pagery), **heart-stakeholder-update** (weekly/monthly update do stakeholders)."
     ;;
   validation)
-    SKILLS="**product-discovery** (JTBD framework), **experiment-designer** (smoke test/fake door design), **customer-research** lub **ux-researcher-designer** (interview plan + synthesis)."
+    SKILLS="**product-discovery** (JTBD framework), **experiment-designer** (smoke test / fake door), **ux-researcher-designer** (interview plan + synthesis), opcjonalnie **customer-research** equivalent przez ux-researcher."
     ;;
   screening)
-    SKILLS="**screen-deal** (quick fit/no-fit), **dd-checklist** (early DD signals), lub **dd-prep** (pełny case przed IC). Dla founder fit: council z personą 'VC partner'."
+    SKILLS="**deal-desk** (quick fit/no-fit incoming opportunities), **heart-dd-checklist** (sector-aware DD checklist generator), **heart-dd-prep** (one-page DD case dla IC). Dla founder fit: council Tier L z personą 'VC partner'."
     ;;
 esac
 
 # Pricing usually = decision + modeling
 if [ "$PRI_HITS" -ge 1 ]; then
-  SKILLS="$SKILLS Bonus: pricing-strategy + comps-analysis dla benchmarków + council."
+  SKILLS="$SKILLS Bonus: **pricing-strategist** + **heart-comps-analysis** dla benchmarków valuation + council Tier L dla decision."
 fi
 
 # Sector hint adds compliance/context reminder for Heart portfolio sectors.

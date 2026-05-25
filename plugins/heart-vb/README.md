@@ -1,6 +1,6 @@
 # heart-vb — The Heart Venture Builder toolkit
 
-**Jedna instalacja, kompletny VB stack.** 30 skilli w 8 kategoriach pod jednym pluginem.
+**Jedna instalacja, kompletny VB stack.** 36 skilli w 8 kategoriach pod jednym pluginem.
 
 ```
 /plugin marketplace add The-Heart-Vibe/claude-code-marketplace
@@ -20,9 +20,9 @@ I masz wszystko. Bez dodawania innych marketplaces.
 | **vb-finance** | financial-analyst, saas-metrics-coach (unit economics, P&L, KPIs) | alirezarezvani (MIT) |
 | **vb-commercial** | pricing-strategist, deal-desk, commercial-forecaster, channel-economics | alirezarezvani (MIT) |
 | **vb-comms** | board-prep (IC memo), stress-test, hard-call, investor-materials, investor-outreach | mixed (MIT) |
-| **heart-custom** | heart-healthtech-compliance ⭐ (MDR/RODO art. 9), heart-academic-spinouts ⭐ (PAN/CTT/NCBR), heart-energy-storage ⭐ (PSE/DSO/EU Battery Reg), heart-fintech-compliance (KNF/AMLD — legacy) — reflects 2026 focus | The Heart Vibe |
+| **heart-custom** | **Sector contexts:** heart-healthtech-compliance ⭐, heart-academic-spinouts ⭐, heart-energy-storage ⭐, heart-fintech-compliance (legacy). **Atomic daily tools:** heart-pitch-deck, heart-stakeholder-update, heart-comps-analysis, heart-dd-checklist, heart-dd-prep. **Meta:** heart-orchestrate (auto-cowork pattern) | The Heart Vibe |
 
-**Total: 30 skilli.** Pełna lista [w plugin.json](.claude-plugin/plugin.json). Atrybucja w [skills/ATTRIBUTION.md](skills/ATTRIBUTION.md).
+**Total: 36 skilli.** Pełna lista [w plugin.json](.claude-plugin/plugin.json). Atrybucja w [skills/ATTRIBUTION.md](skills/ATTRIBUTION.md).
 
 ## Co robi install.sh
 

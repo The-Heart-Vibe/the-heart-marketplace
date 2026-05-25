@@ -20,7 +20,7 @@
 /plugin install heart-vb@the-heart-vibe
 ```
 
-Po tym masz wszystkie 30 skilli z tej kolekcji. Bez dodawania innych marketplaces. Pełne onboarding step-by-step → [onboarding-vb.md](onboarding-vb.md).
+Po tym masz wszystkie 36 skilli z tej kolekcji. Bez dodawania innych marketplaces. Pełne onboarding step-by-step → [onboarding-vb.md](onboarding-vb.md).
 
 ---
 
@@ -410,4 +410,4 @@ Cowork **nie oszczędza** tokenów netto, ale:
 
 Lista będzie ewoluować w miarę feedbacku zespołu. PR mile widziane.
 
-**Last update:** 2026-05-24 (v0.2.0 — single-install bundle, 30 skilli w heart-vb, dodano self-improving + heart-custom sector contexts)
+**Last update:** 2026-05-24 (v0.2.0 — single-install bundle, 36 skilli w heart-vb, dodano self-improving + heart-custom sector contexts)

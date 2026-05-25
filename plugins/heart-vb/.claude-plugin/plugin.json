@@ -1,7 +1,7 @@
 {
   "name": "heart-vb",
-  "version": "0.4.0",
-  "description": "Heart Venture Builder toolkit — 31 skilli w 8 kategoriach + 4 auto-hooki. Council multi-LLM debate, self-improving agent (si:*), product discovery/competitive teardown/experiment design, financial modeling, deal screening, IC memo & board prep, investor materials, plus heart-orchestrate (auto-spawn cowork wzorca orchestrator+workers z persona library), 4 Heart-specific sector contexts (HealthTech/Academic spinouts/Energy storage/FinTech — reflecting current portfolio focus). Hooki auto-suggesta skill/cowork/model/research-tool per prompt — analityk nie musi świadomie wybierać. Bundle z attribution dla upstream (MIT).",
+  "version": "0.5.0",
+  "description": "Heart Venture Builder toolkit — 36 skilli w 8 kategoriach + 4 auto-hooki. Council multi-LLM debate, self-improving agent (si:*), product discovery/competitive teardown/experiment design, financial modeling (saas-metrics, 3-statement, DCF), deal screening (deal-desk + heart-dd-checklist + heart-dd-prep), pitch/IC/investor comms (board-prep + heart-pitch-deck + heart-stakeholder-update + investor-materials), heart-comps-analysis dla valuation benchmarks, 4 Heart-specific sector contexts (HealthTech/Academic spinouts/Energy storage/FinTech), heart-orchestrate (auto-spawn cowork orchestrator+workers + persona library). Hooki auto-suggesta skill/cowork/model/research-tool per prompt — analityk nie musi świadomie wybierać. Bundle z attribution dla upstream (MIT).",
   "author": {
     "name": "The Heart Vibe"
   },
@@ -38,6 +38,11 @@
     "./skills/heart-custom/heart-academic-spinouts",
     "./skills/heart-custom/heart-energy-storage",
     "./skills/heart-custom/heart-fintech-compliance",
-    "./skills/heart-custom/heart-orchestrate"
+    "./skills/heart-custom/heart-orchestrate",
+    "./skills/heart-custom/heart-pitch-deck",
+    "./skills/heart-custom/heart-stakeholder-update",
+    "./skills/heart-custom/heart-comps-analysis",
+    "./skills/heart-custom/heart-dd-checklist",
+    "./skills/heart-custom/heart-dd-prep"
   ]
 }

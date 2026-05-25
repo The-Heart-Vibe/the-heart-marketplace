@@ -8,7 +8,7 @@ Przewodnik dla analityków i konsultantów VB. **Jedna instalacja, kompletny VB 
 
 ## Co dostajesz po install
 
-Jeden plugin `heart-vb` zawiera **30 skilli** w 8 kategoriach:
+Jeden plugin `heart-vb` zawiera **36 skilli** w 8 kategoriach:
 
 | Kategoria | Skille | Do czego |
 |-----------|--------|----------|
@@ -19,7 +19,7 @@ Jeden plugin `heart-vb` zawiera **30 skilli** w 8 kategoriach:
 | **vb-finance** | financial-analyst, saas-metrics-coach | Unit economics, P&L, KPIs, projekcje |
 | **vb-commercial** | pricing-strategist, deal-desk, commercial-forecaster, channel-economics | Pricing, deal screening, GTM forecasts |
 | **vb-comms** | board-prep (IC memo), stress-test, hard-call, investor-materials, investor-outreach | IC memo, pitch deck, investor comms |
-| **heart-custom** | heart-healthtech-compliance ⭐, heart-academic-spinouts ⭐, heart-energy-storage ⭐, heart-fintech-compliance (legacy) | Sector context reflektujące focus 2026 (HealthTech, uczelnie, magazyny energii) |
+| **heart-custom** | **Sector:** heart-healthtech-compliance ⭐, heart-academic-spinouts ⭐, heart-energy-storage ⭐, heart-fintech-compliance (legacy). **Daily tools:** heart-pitch-deck, heart-stakeholder-update, heart-comps-analysis, heart-dd-checklist, heart-dd-prep. **Meta:** heart-orchestrate | Sector contexts (focus 2026) + atomic daily VB tools (pitch decks, updates, comps, DD) |
 
 ➡️ Pełna mapa skilli per faza pracy: [venture-builder.md](venture-builder.md)
 
