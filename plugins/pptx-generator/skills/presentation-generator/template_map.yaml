@@ -1,0 +1,42 @@
+# template_map.yaml
+# Maps each template name to layout → slide index.
+# slide: the 0-based index of the slide to clone from the template .pptx.
+# Add new templates here as the library grows.
+
+templates:
+
+  blank:
+    # "New Core TH Template [10.2025].pptx" — 11 slides
+    layouts:
+      cover:
+        slide: 0          # CUSTOM_2 — right-side title, left image
+      section:
+        slide: 3          # CUSTOM_1_1 — full-width centered title, no background
+      content:
+        slide: 4          # CUSTOM_1_1_1_1 — title + body text area
+      two_column:
+        slide: 4          # No native text two-col in blank; fall back to content
+      chart:
+        slide: 4          # Reuse content slide; chart image injected below title
+      quote:
+        slide: 4          # Reuse content slide; quote text goes into body area
+      closing:
+        slide: 10         # Układ niestandardowy 1 1_2 — logos only, no text injected
+
+  pitchdeck-toolkit:
+    # "Copy of [template] Pitchdeck Toolkit.pptx" — 47 slides
+    layouts:
+      cover:
+        slide: 6          # CUSTOM_1_1_1_1_2_1_1_3 — split: left text, right image
+      section:
+        slide: 10         # CUSTOM_1_1_1_1_2_1 — clean content, body cleared for section
+      content:
+        slide: 10         # CUSTOM_1_1_1_1_2_1 — title top-left, body below
+      two_column:
+        slide: 13         # CUSTOM_1_1_1_1_2_2 — three columns; uses leftmost + rightmost
+      chart:
+        slide: 10         # Reuse content slide; chart image injected below title
+      quote:
+        slide: 10         # Reuse content slide; quote text in body area
+      closing:
+        slide: 44         # CUSTOM_1_1_1_1_2_1 — contact/final slide

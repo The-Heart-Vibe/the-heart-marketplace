@@ -1,0 +1,47 @@
+# brand.yaml — The Heart / VAS Introducer brand configuration
+# Edit this file to match your organisation's brand
+
+version: "1.0.0"
+
+identity:
+  company_name: "The Heart"
+  tagline: ""
+  website: "https://theheart.tech"
+
+colors:
+  primary: "#1A1A2E"        # dark navy
+  secondary: "#E94560"      # accent red
+  background: "#FFFFFF"
+  text: "#1A1A2E"
+  text_light: "#6B7280"
+  accent: "#E94560"
+  success: "#10B981"
+  warning: "#F59E0B"
+
+typography:
+  heading_font: "Calibri"   # fallback-safe for Windows + macOS
+  body_font: "Calibri"
+  heading_size_title: 36
+  heading_size_h1: 28
+  heading_size_h2: 20
+  body_size: 14
+  caption_size: 10
+
+layout:
+  slide_width_emu: 9144000   # 16:9 standard
+  slide_height_emu: 5143500
+  margin_h: 0.08             # % of slide width
+  margin_v: 0.08             # % of slide height
+
+image_generation:
+  provider: "google_imagen"
+  model: "imagen-3.0-generate-001"
+  api_key_env: "GOOGLE_API_KEY"    # set in environment
+  default_style: "professional business, clean minimal, no text, white background"
+  aspect_ratio: "16:9"
+  fallback: "placeholder"          # use placeholder if no API key
+
+icons:
+  library: "lucide"
+  default_size: 64                 # px
+  default_color: "#1A1A2E"        # matches brand primary

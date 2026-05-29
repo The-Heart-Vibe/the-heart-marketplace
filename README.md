@@ -22,6 +22,7 @@ Installer (~3 min) zapyta o opt-in Venture Builder hook → **odpowiedz `y`**.
 | Plugin | Co zawiera | Status |
 |--------|------------|--------|
 | [`heart-vb`](plugins/heart-vb) | **36 skilli** w 8 kategoriach: council (multi-LLM debate), self-improving (si:*), vb-research, vb-product, vb-finance, vb-commercial, vb-comms, heart-custom (sector contexts) | ✅ stable v0.5.0 |
+| [`pptx-generator`](plugins/pptx-generator) | Generator prezentacji `.pptx` z branded templatek The Heart. Claude jako creative director — temat → outline → gotowy plik. Wymaga ręcznego pobrania templatek. | 🚧 WIP v0.1.0 |
 
 Pełna lista skilli w [plugins/heart-vb/.claude-plugin/plugin.json](plugins/heart-vb/.claude-plugin/plugin.json). Atrybucja upstream'ów: [plugins/heart-vb/skills/ATTRIBUTION.md](plugins/heart-vb/skills/ATTRIBUTION.md).
 
