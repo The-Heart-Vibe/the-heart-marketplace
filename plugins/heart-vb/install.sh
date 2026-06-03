@@ -170,15 +170,16 @@ else
   fi
 fi
 
-# ── 9. Chrome DevTools MCP hint (wymagany dla devtools-suggest hook) ────────
+# ── 9. Chrome DevTools MCP — VERIFY (od v0.7.4 auto-installed by plugin.json mcpServers) ────────
 echo ""
+say "Chrome DevTools MCP — sprawdzam status (od v0.7.4 auto-installed przez /plugin install)"
 DEVTOOLS_INSTALLED="no"
 if command -v claude >/dev/null 2>&1; then
   if claude mcp list 2>/dev/null | grep -qi "chrome-devtools"; then
     DEVTOOLS_INSTALLED="yes"
   fi
 fi
-# Fallback: check ~/.claude.json or ~/.claude/mcp.json for chrome-devtools entry
+# Fallback: check configs (legacy path)
 if [ "$DEVTOOLS_INSTALLED" = "no" ]; then
   for cfg in "$HOME/.claude.json" "$HOME/.claude/mcp.json" "$HOME/.config/claude/mcp.json"; do
     if [ -f "$cfg" ] && grep -qi "chrome-devtools" "$cfg" 2>/dev/null; then
@@ -191,12 +192,13 @@ fi
 if [ "$DEVTOOLS_INSTALLED" = "yes" ]; then
   ok "chrome-devtools-mcp wykryty — devtools-suggest hook ma czego potrzebuje"
 else
-  say "Chrome DevTools MCP — wymagany dla devtools-suggest hook. Instaluję automatycznie..."
+  say "Plugin spec deklaruje chrome-devtools w mcpServers — powinno być auto-installed przy /plugin install."
+  say "Jeśli brak — fallback: install manually..."
   if command -v claude >/dev/null 2>&1; then
-    # Try user scope first (persists across all projects)
+    # Fallback dla pre-v0.7.4 setups lub jeśli mcpServers auto-install nie zadziałał
     if claude mcp add --scope user chrome-devtools npx chrome-devtools-mcp@latest 2>/dev/null \
        || claude mcp add chrome-devtools npx chrome-devtools-mcp@latest 2>/dev/null; then
-      ok "chrome-devtools-mcp zainstalowany via \`claude mcp add\`"
+      ok "chrome-devtools-mcp zainstalowany via \`claude mcp add\` (manual fallback)"
       ok "Restart Claude Code aby nowy MCP server był aktywny w aktualnej sesji"
     else
       warn "Auto-install nie powiódł się — uruchom ręcznie:"

@@ -84,23 +84,85 @@ Czyli: **gemini-cli i codex CLI działają w Cowork** (przez Pattern F workers),
 
 > **Cowork install:** w Cowork tab wpisz `/plugin marketplace add The-Heart-Vibe/claude-code-marketplace` → `/plugin install heart-vb@the-heart-vibe`. Hooki auto-load przy starcie sesji. Sprawdź stan przez `/heart-vb:status`.
 
-## Co MUSI być pre-installed (poza pluginem)
+## Co plugin install załatwia automatycznie
 
-Plugin install (`/plugin install heart-vb`) załatwia: **skille** + **hooki** (auto-load z `hooks/hooks.json` od v0.6.10). Wszystko działa "out of the box" dla większości funkcji.
+Od v0.7.4 plugin install (`/plugin install heart-vb`) załatwia:
 
-Ale dla pełnej funkcjonalności (Pattern E/F, milestone tracking, browser navigation) potrzebne są **zewnętrzne dependencies** które plugin install NIE załatwia — wymagają **manual terminal install** (Cowork sandbox nie pozwala na `npm install -g`, `curl ... | sh`):
+- ✅ **47 skilli** (vb-process, vb-product, vb-finance, vb-comms, heart-custom, etc.)
+- ✅ **5 hooków** auto-loaded z `hooks/hooks.json` (4× UserPromptSubmit + 1× PreCompact learning prompt)
+- ✅ **`chrome-devtools-mcp`** auto-registered jako MCP server (od v0.7.4 przez `plugin.json` mcpServers field) — działa w CLI i Cowork bez install.sh
+
+Wszystko above działa **out of the box** po `/plugin install` w obu environments (Claude Code CLI + Claude Desktop Cowork).
+
+## Co MUSI być pre-installed manualnie (poza pluginem)
+
+Dla pełnej funkcjonalności (Pattern E/F multi-LLM, milestone tracking) potrzebne są dodatkowe dependencies które wymagają **system-level install** (Cowork sandbox nie ma terminal access):
 
 | Komponent | Status | Jak zainstalować | Co odblokuje |
 |---|---|---|---|
-| **`gemini-cli`** | **Strongly recommended** | `npm install -g @google/gemini-cli` → `gemini` (Google Workspace OAuth) | Pattern E multi-persona z Gemini, Pattern F voice #2, devtools-suggest hook (token saving) |
+| **`gemini-cli`** | **Strongly recommended** | `npm install -g @google/gemini-cli` → `gemini` (Google Workspace OAuth) | Pattern E multi-persona z Gemini, Pattern F voice #2 |
 | **`codex` CLI** | Optional (Tier 3) | Install Codex CLI + `codex login` (wymaga ChatGPT Plus €22/mc) | Pattern F voice #3 (full multi-LLM debate). Bez Codex Pattern F nadal działa jako 2-voice |
-| **`chrome-devtools-mcp`** | Recommended | `claude mcp add chrome-devtools npx chrome-devtools-mcp@latest` → restart sesji | devtools-suggest hook fully functional (token-efficient browsing dla G2/Crunchbase/LinkedIn) |
 | **Notion MCP connector** | Optional (od v0.7.1) | W Cowork UI: Settings → Connectors → Notion (OAuth). Lub CLI: `claude mcp add notion <package>` | `/heart-vb:status` milestone progress detection (X/12) z Project Card |
 | **`council` CLI binary** | Optional, **terminal-only** | `bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)` | Multi-LLM debate z terminala. **NIE działa z poziomu CC/Cowork** (self-invocation block) — Pattern F to alternatywa |
 
-> **Gotówa "minimum viable" konfiguracja:** `gemini-cli` zainstalowany w terminalu + plugin install w Cowork = pełen Pattern E + 2-voice Pattern F + większość workflow'ów. Pozostałe są nice-to-have.
+> **Minimum viable konfiguracja:** `gemini-cli` zainstalowany w terminalu + plugin install w Cowork = pełen Pattern E + 2-voice Pattern F + chrome-devtools auto-loaded. Pozostałe są nice-to-have.
 
 **Weryfikacja:** odpal `/heart-vb:status` po setup — pokaże tier readiness (1/2/3) + concrete fix commands jeśli czegoś brakuje.
+
+## Path A: Install przez Cowork (rekomendowane dla większości pracowników)
+
+```
+# W Claude Desktop → Cowork tab:
+/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin install heart-vb@the-heart-vibe
+
+# Restart Cowork tab (zamknij + otwórz)
+# Plugin + hooki + chrome-devtools-mcp są aktywne
+
+# Verify:
+/heart-vb:status
+```
+
+**Co dostajesz:** Wszystko z "Co plugin install załatwia automatycznie" działa od razu. Dla pełnego Pattern F musisz zainstalować gemini-cli w terminalu (jednorazowo, w przeglądarce login).
+
+## Path B: Install przez Claude Code CLI w terminalu (advanced)
+
+Dla pracowników którzy preferują terminal lub potrzebują full setup w jednym kroku:
+
+```bash
+# 1. Otwórz macOS Terminal
+
+# 2. Sprawdź czy masz Claude Code CLI
+claude --version
+# Jeśli brak: pobierz z https://claude.ai/code
+
+# 3. Dodaj marketplace + zainstaluj plugin
+claude
+# W interactive prompt:
+/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin install heart-vb@the-heart-vibe
+/exit
+
+# 4. Odpal install.sh dla pełnego setup'u (gemini-cli + council CLI + verify chrome-devtools)
+bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)
+
+# 5. (Jeśli installer pyta) Authorize gemini przez browser
+gemini
+
+# 6. (Opcjonalnie dla Pattern F 3-voice) Codex CLI
+codex login  # wymaga ChatGPT Plus
+
+# 7. Verify wszystko działa
+claude
+/heart-vb:status
+```
+
+**Zalety Path B:**
+- Wszystkie dependencies (gemini-cli, council CLI, chrome-devtools) w jednym kroku
+- Cross-session memory (si:* działa cross-session w CLI vs per-session w Cowork)
+- Pełny Pattern E/F nawet bez Cowork
+
+**Po Path B** możesz nadal używać Cowork — plugin jest zarejestrowany globalnie, dependencies są system-level.
 
 ## Co robi install.sh
 
