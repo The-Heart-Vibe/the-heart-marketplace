@@ -98,6 +98,42 @@ PRICING_PAT=(
   '\b(price (point|elasticity)|monetiz)\b'
 )
 
+# MILESTONE intent — DD by Heart vocabulary (M1-M12)
+# Wykrywa konkretne milestone z procesu VB i deleguje do heart-vb-process
+# master orchestrator (który dalej routuje do sub-skill per milestone).
+# Priorytet: wyższy niż generic intents bo bardziej specific.
+MILESTONE_PAT=(
+  # Workflow-level keywords (heart-vb-process / assessment / kickoff)
+  '\b(DD by Heart|12 milestones|stempel The Heart|stempel TH|venture building proces|VB proces)\b'
+  '\b(kickoff projektu|kick[- ]off projektu|assessment projektu|audyt projektu|gdzie stoimy)\b'
+  '\b(ile milestones (done|zrobionych)|risk ranking|sprint planning|bi[- ]weekly summary|fundraising readiness)\b'
+  '\b(przepu(ść|sc)\s+projekt|cały proces|full process|pełen pipeline)\b'
+  # M1 — Analiza rynku
+  '\b(TAM|SAM|SOM|sizing rynku|rozmiar rynku|trendy rynkowe|wzrost YoY|slajd Market)\b'
+  # M2 — Konkurencja (covered by RESEARCH_PAT też, ale tutaj milestone-specific)
+  '\b(competitive landscape|5-10 konkurent|defensible advantage)\b'
+  # M3 — Walidacja z inwestorami (early signal)
+  '\b(early signal|walidacja z inwestor|reality check z inwest|2-3 rozmowy z VC)\b'
+  # M4 — Walidacja problemu
+  '\b(walidacja problemu|10-20 rozm[ow]w|segmentacja klient|problem confirmed)\b'
+  # M5 — Napkin math
+  '\b(napkin math|napkin|1-stronicowy|czy to się spina|unit econ na kartce|break[- ]even szybko)\b'
+  # M6 — Exit strategy & acquirers
+  '\b(exit strategy|kto to kupi|potencjalni acquirers|comparable exits|mnożniki przy sprzedaży|exit narrative)\b'
+  # M7 — Zespół & cap table
+  '\b(cap table|equity split|ESOP planning|advisory agreement|spółka założona)\b'
+  # M8 — MVP / produkt & roadmapa (covered by VALIDATION/PRODUCT)
+  '\b(MVP|prototyp|roadmapa produktowa|demo dla klienta|6-18 miesi)\b'
+  # M9 — Walidacja rozwiązania & pricing (overlap z PRICING)
+  '\b(LOI|letter of intent|pilot agreement|willingness to pay|5 walidacji)\b'
+  # M10 — IP/regulacje/prawo
+  '\b(IP ownership|regulatory path|ścieżka regulacyjna|legal red flag|CE\\/FDA|MDR|MIFID|AMLD)\b'
+  # M11 — Materiały fundraisingowe (covered by WRITING_PAT)
+  '\b(data room|pitch deck iterowany|pełen model finansowy|3-statement P\\&L)\b'
+  # M12 — Lista inwestorów & outreach
+  '\b(lista inwestor|outreach plan|target inwestor|intro do funduszy|CRM funduszy)\b'
+)
+
 # BRAINSTORM intent — generic exploratory tasks bez clear VB context
 # (organizacja eventu, struktura spotkania, ad-hoc decyzja, draft komunikacji,
 #  refleksja strategiczna). Fall-through gdy żaden inny intent nie pasuje.
@@ -132,18 +168,24 @@ SCR_HITS=$(match_count "$PROMPT" "${SCREENING_PAT[@]}")
 PRI_HITS=$(match_count "$PROMPT" "${PRICING_PAT[@]}")
 SEC_HITS=$(match_count "$PROMPT" "${SECTOR_PAT[@]}")
 BRN_HITS=$(match_count "$PROMPT" "${BRAINSTORM_PAT[@]}")
+MIL_HITS=$(match_count "$PROMPT" "${MILESTONE_PAT[@]}")
 
-TOTAL=$((DEC_HITS + RES_HITS + MOD_HITS + WRT_HITS + VAL_HITS + SCR_HITS + PRI_HITS))
+TOTAL=$((DEC_HITS + RES_HITS + MOD_HITS + WRT_HITS + VAL_HITS + SCR_HITS + PRI_HITS + MIL_HITS))
 
 # Trigger threshold
 # Brainstorming jest fall-through: fire'uje gdy BRAINSTORM_PAT match a żaden VB intent nie złapał
 if [ "$TOTAL" -lt 1 ] && [ "$BRN_HITS" -lt 1 ]; then exit 0; fi
-if [ "$TOTAL" -eq 1 ] && [ "$SEC_HITS" -eq 0 ] && [ "$BRN_HITS" -eq 0 ]; then exit 0; fi  # single weak signal — skip
+if [ "$TOTAL" -eq 1 ] && [ "$SEC_HITS" -eq 0 ] && [ "$BRN_HITS" -eq 0 ] && [ "$MIL_HITS" -eq 0 ]; then exit 0; fi  # single weak signal — skip
 
 # ── Determine primary intent (highest hit count) ─────────────────────────────
 
-# Fall-through to brainstorming gdy żaden VB intent nie złapał (TOTAL=0) ale BRAINSTORM_PAT match
-if [ "$TOTAL" -eq 0 ] && [ "$BRN_HITS" -ge 1 ]; then
+# MILESTONE intent ma najwyższy priorytet — to jest DD by Heart vocabulary
+# (specyficzne keywords procesu VB → bezpośredni routing do heart-vb-process)
+if [ "$MIL_HITS" -ge 1 ]; then
+  PRIMARY="milestone"
+  PRIMARY_HITS=$MIL_HITS
+# Fall-through to brainstorming gdy żaden VB intent nie złapał (TOTAL=0 bez MIL) ale BRAINSTORM_PAT match
+elif [ "$TOTAL" -eq 0 ] && [ "$BRN_HITS" -ge 1 ]; then
   PRIMARY="brainstorm"
   PRIMARY_HITS=$BRN_HITS
 else
@@ -155,6 +197,40 @@ else
   if [ "$WRT_HITS" -gt "$PRIMARY_HITS" ]; then PRIMARY="writing"; PRIMARY_HITS=$WRT_HITS; fi
   if [ "$VAL_HITS" -gt "$PRIMARY_HITS" ]; then PRIMARY="validation"; PRIMARY_HITS=$VAL_HITS; fi
   if [ "$SCR_HITS" -gt "$PRIMARY_HITS" ]; then PRIMARY="screening"; PRIMARY_HITS=$SCR_HITS; fi
+fi
+
+# Wykryj konkretny milestone (M1-M12) z prompta dla lepszego routing
+DETECTED_MILESTONE=""
+if [ "$MIL_HITS" -ge 1 ]; then
+  if printf '%s' "$PROMPT" | grep -qiE 'TAM|SAM|SOM|rozmiar rynku|trendy rynkowe|slajd Market'; then
+    DETECTED_MILESTONE="M1 (Analiza rynku)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'competitive landscape|defensible advantage|5-10 konkurent'; then
+    DETECTED_MILESTONE="M2 (Analiza konkurencji)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'early signal|walidacja z inwestor|2-3 rozmowy z VC'; then
+    DETECTED_MILESTONE="M3 (Early signal z inwestorami)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'walidacja problemu|10-20 rozm|segmentacja klient'; then
+    DETECTED_MILESTONE="M4 (Walidacja problemu z klientami)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'napkin math|czy to się spina|unit econ na kartce'; then
+    DETECTED_MILESTONE="M5 (Napkin math)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'exit strategy|kto to kupi|acquirers|comparable exits|mnożniki'; then
+    DETECTED_MILESTONE="M6 (Exit strategy & acquirers)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'cap table|equity split|ESOP|spółka założ'; then
+    DETECTED_MILESTONE="M7 (Zespół & cap table)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'MVP|prototyp|roadmapa produktowa|demo dla klient'; then
+    DETECTED_MILESTONE="M8 (MVP & roadmapa)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'LOI|letter of intent|pilot agreement|willingness to pay'; then
+    DETECTED_MILESTONE="M9 (Walidacja rozwiązania & pricing)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'regulatory path|ścieżka regulacyjna|legal red flag|CE\/FDA|MDR|MIFID'; then
+    DETECTED_MILESTONE="M10 (IP, regulacje & prawo)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'data room|pitch deck iterowany|pełen model finansowy|3-statement'; then
+    DETECTED_MILESTONE="M11 (Materiały fundraisingowe)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'lista inwestor|outreach plan|target inwestor|intro do funduszy'; then
+    DETECTED_MILESTONE="M12 (Lista inwestorów & outreach)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'kickoff|assessment projektu|gdzie stoimy|risk ranking'; then
+    DETECTED_MILESTONE="WORKFLOW (Krok 1-2: assessment + kickoff)"
+  elif printf '%s' "$PROMPT" | grep -qiE 'cały proces|full process|przepu(ść|sc) projekt'; then
+    DETECTED_MILESTONE="FULL PROCESS (przepuść projekt przez 12 milestones)"
+  fi
 fi
 
 # ── Map intent to skill suggestions ──────────────────────────────────────────
@@ -180,6 +256,9 @@ case "$PRIMARY" in
     ;;
   brainstorm)
     SKILLS="**brainstorming** — generic thinking partner dla non-VB tasków bez precyzyjnego kontekstu (organizacja eventu, struktura spotkania, ad-hoc decyzja personal/operacyjna, draft komunikacji). Flow: explore context → clarify questions one-at-a-time → propose 2-3 approaches → user approves → output. Po dialogu, jeśli scope się skrystalizował, transition do bardziej specyficznego skill (heart-orchestrate / board-prep / heart-pitch-deck etc.)."
+    ;;
+  milestone)
+    SKILLS="**heart-vb-process** (master orchestrator dla DD by Heart 12 milestones framework). Detected: ${DETECTED_MILESTONE:-unspecified}. Routing: M1 Analiza rynku → market-research / M2 Konkurencja → competitive-teardown / M3 Early signal → product-discovery jako fallback / M4 Walidacja problemu → product-discovery / **M5 Napkin math → vb-process/napkin-math** ⭐ / **M6 Exit strategy → vb-process/exit-strategy** ⭐ / M7 Cap table → deal-desk / M8 MVP → product-strategist / M9 Pricing & LOI → pricing-strategist / M10 IP/regulacje → heart-dd-checklist + sector context / M11 Materiały → heart-pitch-deck + board-prep + financial-analyst / M12 Inwestorzy → investor-outreach. Workflow skille: **vb-process/assessment** (Krok 1 — 12-row checker), **vb-process/kickoff** (Krok 2 — risk ranking + sprints). Mode Full Process: 'przepuść projekt przez cały proces' → uruchom assessment + kickoff + per-milestone execution w kolejności risk ranking."
     ;;
 esac
 
@@ -209,7 +288,7 @@ cat <<EOF
 {
   "hookSpecificOutput": {
     "hookEventName": "UserPromptSubmit",
-    "additionalContext": "💡 [Venture Builder hook] User's prompt matches **${PRIMARY}** intent (decision:${DEC_HITS} research:${RES_HITS} modeling:${MOD_HITS} writing:${WRT_HITS} validation:${VAL_HITS} screening:${SCR_HITS} pricing:${PRI_HITS} sector:${SEC_HITS} brainstorm:${BRN_HITS}). Suggested skill(s): ${SKILLS}${SECTOR_NOTE} === UNIVERSAL CONSENT GATE === BEFORE invoking ANY skill or starting workflow (brainstorming, Pattern E/F, board-prep, financial-analyst, deep-research, any skill), ask user in 1-2 sentences PLAIN BUSINESS LANGUAGE (NIE 'Pattern E/F' jargon). Template: 'To wygląda na [intent w plain] — proponuję [skill X / dialog / 3 ekspertów / cross-check 3 AI]. (a) tak (b) odpowiedz inline bez skill (c) sam wiem co chcę.' Wait for explicit yes. Skip consent ONLY na: trivial lookups (haiku tier, definicje, 1-line answers), single Read/Bash commands, slash commands. Opt-out per prompt: 'BEZ PYTANIA: ...' / 'BEZ COUNCIL: ...' / 'BEZ COWORK: ...'. Pełen pattern w skills/heart-custom/heart-orchestrate/SKILL.md (KROK -1 confirmation)."
+    "additionalContext": "💡 [Venture Builder hook] User's prompt matches **${PRIMARY}** intent (decision:${DEC_HITS} research:${RES_HITS} modeling:${MOD_HITS} writing:${WRT_HITS} validation:${VAL_HITS} screening:${SCR_HITS} pricing:${PRI_HITS} sector:${SEC_HITS} brainstorm:${BRN_HITS} milestone:${MIL_HITS}). Suggested skill(s): ${SKILLS}${SECTOR_NOTE} === UNIVERSAL CONSENT GATE === BEFORE invoking ANY skill or starting workflow (brainstorming, Pattern E/F, board-prep, financial-analyst, deep-research, heart-vb-process, any skill), ask user in 1-2 sentences PLAIN BUSINESS LANGUAGE (NIE 'Pattern E/F' jargon, NIE 'M5' kodu — używaj nazwy 'napkin math'). Template: 'To wygląda na [intent w plain] — proponuję [skill X / dialog / 3 ekspertów / cross-check 3 AI]. (a) tak (b) odpowiedz inline bez skill (c) sam wiem co chcę.' Wait for explicit yes. Skip consent ONLY na: trivial lookups (haiku tier, definicje, 1-line answers), single Read/Bash commands, slash commands. Opt-out per prompt: 'BEZ PYTANIA: ...' / 'BEZ COUNCIL: ...' / 'BEZ COWORK: ...'. Pełen pattern w skills/heart-custom/heart-orchestrate/SKILL.md (KROK -1 confirmation). DD by Heart 12 milestones framework opisany w skills/heart-custom/heart-vb-process/SKILL.md."
   }
 }
 EOF
