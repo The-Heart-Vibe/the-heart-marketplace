@@ -89,3 +89,56 @@ Before delivering:
 - the proof point is concrete
 - filler praise and softener language are gone
 - word count stays tight
+
+---
+
+## DD by Heart — Milestone Mapping (M12 Lista inwestorów & outreach)
+
+Ten skill jest **primary tool dla M12** w procesie Venture Building w The Heart (12 non-negotiable milestones). Pełny framework: `/heart-vb-process`.
+
+### Filozofia (z dokumentu firmy)
+
+> *"Ten punkt powinien być **głównym deliverable do menadżera**. Jeśli mamy gotowe materiały i nie wiemy do kogo iść — tracimy czas. Jeśli wiemy do kogo iść i mamy intro — lecimy od razu gdy materiały są gotowe."*
+
+Ważne: **lista buduje się od dnia 1** projektu (side activity z dokumentu) — NIE jest to "ostatni task po M11". Sukcesywnie identyfikujesz intro candidates podczas całej fazy Discovery/Creation/Validation.
+
+### Definition of Done (M12)
+
+- [ ] **Lista 20-30 target inwestorów** (tiered)
+- [ ] **Stage-aligned** — pre-seed/seed/Series A funds matching naszej rundy
+- [ ] **Sector-aligned** — fundusze inwestujące w naszej branży (HealthTech VC dla MedTech itd.)
+- [ ] **Geography matched** — PL, EU, US (depends on stage i wielkość rundy)
+- [ ] **Intro zidentyfikowane / w toku** — preferowane warm intros, nie cold outreach
+- [ ] **Timeline outreachu ustalony** — sequencing (tier 1 first, tier 2 follow-up)
+- [ ] **CRM / tracker aktywny** — status per fund (not contacted / contacted / meeting / pass / IC)
+- [ ] **Gotowość do natychmiastowego startu outreachu** po M11 done
+
+### Tiering inwestorów
+
+**Tier 1 (top targets — 5-10)**:
+- Strong sector fit, known to fund similar stage, ideally warm intro
+- First wave outreach — get them excited, use feedback to iterate
+
+**Tier 2 (good fit — 10-15)**:
+- Sector match, stage match, ale cold outreach lub weaker intro
+- Second wave after Tier 1 feedback incorporated
+
+**Tier 3 (long shot — 5+)**:
+- Brand-name funds, less likely fit, ale worth trying
+- Last wave, also good dla networking value
+
+### Red flags (z dokumentu firmy)
+
+- 🚩 **"Materiały gotowe, nie wiemy do kogo"** — najgorszy case, M11 traci momentum czekając na M12
+- 🚩 Lista zbyt mała (<10) — niska konwersja w VC outreach, potrzebujemy volume
+- 🚩 Lista zbyt duża (50+) — brak focus, każdemu spamujesz identical pitch
+- 🚩 Sample-stage mismatch — wysyłanie Series A deck do pre-seed VC i odwrotnie
+- 🚩 Cold outreach 100% — warm intros mają 5-10x wyższą konwersję
+- 🚝 Brak CRM tracking — pomylisz status kto co odpowiedział
+
+### Connect to other milestones
+
+- **M12 zaczyna się w fazie Discovery** — równolegle z M1+M2 budujemy listę (M3 early signal contacts wracają do M12 jako warm leads)
+- **M12 + M11 done** = full fundraising launch — strategiczne spotkanie z zarządem (Krok 4)
+- **Po M12 active outreach** → bi-weekly summary cadence (`bi-weekly-summary`) wzrasta do weekly
+- **Verdict z fundraising-readiness** decyduje czy aktywujemy outreach

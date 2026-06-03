@@ -1,7 +1,7 @@
 {
   "name": "heart-vb",
-  "version": "0.7.0-rc1",
-  "description": "Heart Venture Builder toolkit aligned z firmowym procesem VB (DD by Heart — 12 non-negotiable milestones w 4 fazach: Discovery → Creation → Validation → Fundraising). 43 skilli w 9 kategoriach + 4 auto-hooki (działają w Claude Code CLI/IDE i Claude Desktop Cowork). Core: heart-vb-process master orchestrator (routing po milestone vocabulary lub full process pipeline), assessment (Krok 1 — 12-row checker stanu projektu), kickoff (Krok 2 — risk ranking + sprint planning), napkin-math (M5), exit-strategy (M6), heart-orchestrate (Pattern E persona-driven + Pattern F multi-LLM debate bypass council CLI nested block), self-improving (si:*), product discovery/teardown/experiment, financial modeling, deal screening, pitch/IC/investor comms, 4 sector contexts (HealthTech/Academic/Energy/FinTech), brainstorming, status (/heart-vb:status). Hooki auto-suggesta skill/cowork/model/research-tool. Bundle z attribution (MIT).",
+  "version": "0.7.0-rc2",
+  "description": "Heart Venture Builder toolkit aligned z firmowym procesem VB (DD by Heart — 12 non-negotiable milestones w 4 fazach: Discovery → Creation → Validation → Fundraising). 47 skilli w 9 kategoriach + 4 auto-hooki (działają w Claude Code CLI/IDE i Claude Desktop Cowork). Core: heart-vb-process master orchestrator (routing po milestone vocabulary lub full process pipeline). Pełny vb-process: assessment (Krok 1 — 12-row checker), kickoff (Krok 2 — risk ranking + sprints), bi-weekly-summary (Krok 3 — co 2 tyg. learnings + red flags), fundraising-readiness (Krok 4 — go/no-go gate), napkin-math (M5), exit-strategy (M6), cap-table-helper (M7), investor-early-signal (M3 reality check). Plus: heart-orchestrate Pattern E/F, self-improving (si:*), product discovery/teardown/experiment, financial modeling, deal screening, pitch/IC/investor comms, 4 sector contexts (HealthTech/Academic/Energy/FinTech), brainstorming, status (/heart-vb:status). Hooki auto-suggesta skill/cowork/model/research-tool. Bundle z attribution (MIT).",
   "author": {
     "name": "The Heart Vibe"
   },
@@ -50,6 +50,10 @@
     "./skills/vb-process/assessment",
     "./skills/vb-process/kickoff",
     "./skills/vb-process/napkin-math",
-    "./skills/vb-process/exit-strategy"
+    "./skills/vb-process/exit-strategy",
+    "./skills/vb-process/cap-table-helper",
+    "./skills/vb-process/investor-early-signal",
+    "./skills/vb-process/bi-weekly-summary",
+    "./skills/vb-process/fundraising-readiness"
   ]
 }

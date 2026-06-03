@@ -95,3 +95,48 @@ Gdy ktoś prosi o **poprawić istniejący deck**:
 - Sector context: załącz odpowiedni **heart-{healthtech/academic/energy/fintech}-compliance/context**
 
 Output to deck **outline + content per slide**. NIE generuję faktycznych .pptx — to artifact tools / external designer job.
+
+---
+
+## DD by Heart — Milestone Mapping (M11 Materiały fundraisingowe — pitch deck part)
+
+Ten skill jest **primary tool dla pitch deck w M11** procesu Venture Building w The Heart (12 non-negotiable milestones). M11 zawiera też model finansowy (`vb-finance/financial-analyst`), one-pager (`vb-comms/investor-materials`), executive summary (`vb-comms/board-prep`), data room. Pełny framework: `/heart-vb-process`.
+
+### Definition of Done (M11 — pitch deck part)
+
+- [ ] **10-15 slajdów** (jasne, czytelne, brak text-walls)
+- [ ] **Iterowane** — minimum 3-5 wersji (NIE "wersja 1 po tygodniu")
+- [ ] **Przetestowane w rozmowach** — feedback od min. 2-3 osób z external perspective
+- [ ] Każdy slide bazuje na **insightach z milestones 1-10** (NIE generic content)
+- [ ] **Spójność narracji** — slajdy budują storytelling, nie data dump
+- [ ] **Sector context applied** — HealthTech/Academic/Energy/FinTech specific compliance/regulatory points wymaganych przez fundusze sektorowe
+
+### Pre-requisites z innych milestones
+
+| Slide | Wymaga done | Z którego skill |
+|---|---|---|
+| Problem | M4 walidacja problemu | `product-discovery` |
+| Solution | M8 MVP / demo | `product-strategist` |
+| Market | M1 analiza rynku | `market-research` |
+| Competition | M2 analiza konkurencji | `competitive-teardown` |
+| Business Model | M5 napkin math | `napkin-math` |
+| Traction | M9 walidacja rozwiązania + pricing | `pricing-strategist` |
+| Team | M7 cap table | `cap-table-helper` |
+| Exit | M6 exit strategy & acquirers | `exit-strategy` |
+| Financials | M11 model finansowy | `financial-analyst` |
+| Ask | All (suma) | wszystkie powyższe |
+
+### Red flags (z dokumentu firmy)
+
+- 🚩 "Dek z 1 tygodnia pracy" — bez insightów, polished ale empty
+- 🚩 Generic content (np. "huge market" bez konkretnej liczby)
+- 🚩 Brak slajdu Exit — pierwsze pytanie VC bez odpowiedzi
+- 🚩 Slajd Team bez konkretnych nazwisk / advisor'ów
+- 🚩 Financials slide bez source (3Y P&L wzięte z sufitu)
+- 🚩 Brak sector-specific compliance (dla regulowanych sectors VC zignoruje)
+
+### Connect to other milestones
+
+- **M11 wymaga 9/12 milestones done** — bez tego deck jest hollow
+- **M11 + M12 (lista inwestorów)** = pełna fundraising gotowość
+- **M11 outputs do M12** — deck jest sent z personalized cover note do każdego target VC

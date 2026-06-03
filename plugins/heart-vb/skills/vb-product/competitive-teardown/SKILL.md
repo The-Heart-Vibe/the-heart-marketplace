@@ -169,3 +169,36 @@ Navigation: global search, keyboard shortcuts, in-app help.
 
 - **Product Strategist** (`product-team/product-strategist/`) — Competitive insights feed OKR and strategy planning
 - **Landing Page Generator** (`product-team/landing-page-generator/`) — Competitive positioning informs landing page messaging
+
+---
+
+## DD by Heart — Milestone Mapping (M2 Analiza konkurencji)
+
+Ten skill jest **primary tool dla M2** w procesie Venture Building w The Heart (12 non-negotiable milestones). Pełny framework: `/heart-vb-process`.
+
+### Definition of Done (M2)
+
+- [ ] **5-10 konkurentów** zidentyfikowanych (nie 2-3 — VC zignoruje, nie 20+ — to noise)
+- [ ] Per konkurent: **funding raised** (Crunchbase/Dealroom)
+- [ ] Per konkurent: **business model** (subscription, marketplace, hardware, mix)
+- [ ] Per konkurent: **siła vs słabość** (table format)
+- [ ] **Defensible advantage** — jasna odpowiedź na "dlaczego my a nie oni"
+- [ ] Menadżer / founder umie odpowiedzieć na pytanie inwestora: "dlaczego wy?"
+
+### Red flags (z dokumentu firmy)
+
+- 🚩 "Nie mamy konkurencji" — zawsze są substytuty lub alternative solutions
+- 🚩 Brak fundingu konkurencji w analizie (must-have data point)
+- 🚩 Generic "lepszy UX" jako defensible advantage (każdy to mówi)
+- 🚩 Brak international competitors (nawet jeśli celujemy w PL, VC sprawdzi globalnie)
+- 🚩 Tylko bezpośredni konkurenci — pominięcie adjacent / substitute (np. Excel jako "konkurent" dla nowej SaaS analytics platform)
+
+### Output musi pomóc w M3
+
+M1+M2 razem = **wystarczające do M3 (walidacja z inwestorami early signal)**. Po M2 menadżer powinien być w stanie odbyć merytoryczną rozmowę: "popatrzyłem na rynek, popatrzyłem na konkurencję, odróżnia się tym i tym".
+
+### Connect to other milestones
+
+- **Po M2 done** → M3 (early signal z inwestorami) lub M4 (walidacja problemu)
+- **M2 feeds M11** — slajd "Competitive Landscape" w pitch deck'u
+- **M2 inputs do M6** — konkurenci są potential acquirers (consolidation play)

@@ -128,3 +128,31 @@ Walked one at a time by `/cs:grill-commercial` or the orchestrator. Recommended 
    Canon: Ramanujam (*Monetizing Innovation*) — Mistake #4: tiers with no clear differentiator make 70% of customers pick the cheapest.
 
 Walk depth-first. Lock 1-3 before opening 4-6. After all 6 are answered, invoke `pricing_model_picker.py` → `wtp_analyzer.py` → `packaging_designer.py` in sequence.
+
+---
+
+## DD by Heart — Milestone Mapping (M9 Walidacja rozwiązania & pricing)
+
+Ten skill jest **primary tool dla M9** w procesie Venture Building w The Heart (12 non-negotiable milestones). Pełny framework: `/heart-vb-process`.
+
+### Definition of Done (M9)
+
+- [ ] **Min. 5 walidacji z klientami** — demo, pilot, lub LOI
+- [ ] **Pricing model potwierdzony** — klient akceptuje cenę (NIE "fajne, ciekawe", tylko "podpisujemy LOI / startujemy pilot")
+- [ ] **Pipeline zmapowany** — ilu klientów, na jakim etapie cyklu sprzedaży
+- [ ] **Idealnie:** first revenue / LOI / pilot agreement
+- [ ] Dla deep-tech: **feasibility potwierdzone laboratoryjnie z klientem**
+
+### Red flags (z dokumentu firmy)
+
+- 🚩 "150 zwalidowane" ale **zero willingness to pay** — niewalidacja, tylko polite interest
+- 🚩 LOI bez ceny — "podpisujemy bo nam się podoba" nie liczy się jako pricing validation
+- 🚩 1 entuzjastyczny pilot ale brak pipeline backup
+- 🚩 Pricing potwierdzony tylko przez early adopter ("friends rate") — mainstream odrzuci
+
+### Connect to other milestones
+
+- **M9 wymaga M4 done** — bez segmentacji nie wiesz komu sprzedajesz
+- **M9 wymaga M8 done** — bez MVP nie ma co pokazywać klientowi
+- **M9 feeds M11** — slajd "Traction" / "Validation" w pitch deck'u (LOI list, pipeline)
+- **M9 jest must-have dla seed fundraising** (mniej krytyczny dla pre-seed)

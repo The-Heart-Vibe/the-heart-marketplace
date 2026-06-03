@@ -112,3 +112,32 @@ CLI utility that:
 - emits prioritized test plan with suggested test types
 
 See `references/discovery-frameworks.md` for framework details.
+
+---
+
+## DD by Heart — Milestone Mapping (M4 Walidacja problemu)
+
+Ten skill jest **primary tool dla M4** w procesie Venture Building w The Heart (12 non-negotiable milestones). Pełny framework: `/heart-vb-process`.
+
+### Definition of Done (M4)
+
+- [ ] **Min. 10-20 rozmów** z potencjalnymi klientami (NIE 1-2, NIE desk research)
+- [ ] **Jasna segmentacja** — 2-3 segmenty target customer (NIE "wszyscy mogą być klientem")
+- [ ] **Problem confirmed** — większość klientów potwierdza że ból istnieje i jest istotny
+- [ ] **Koszt problemu** dla klienta (ile ich kosztuje obecnie / co tracą)
+- [ ] Notatki / nagrania z rozmów udokumentowane (data room ready)
+- [ ] **NIE pytamy o willingness to pay** w M4 — to M9 (Walidacja rozwiązania)
+
+### Red flags (z dokumentu firmy)
+
+- 🚩 1 rozmowa z klientem — anekdota nie data
+- 🚩 "Wszyscy mogą być klientem" — brak segmentacji
+- 🚩 Desk research zamiast realnych rozmów
+- 🚩 Tylko 1 segment (high concentration risk)
+- 🚩 Brak dokumentacji (za 3 mies. zapomnisz co kto powiedział)
+
+### Connect to other milestones
+
+- **Po M4 done** → M5 napkin math (mając jasny segment + koszt problemu można policzyć ARPU)
+- **M4 feeds M8** — segmenty i ich potrzeby informują MVP scope
+- **M4 feeds M11** — slajd "Problem" + "Target Customer" w pitch deck'u

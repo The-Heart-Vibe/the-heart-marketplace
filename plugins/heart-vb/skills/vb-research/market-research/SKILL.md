@@ -73,3 +73,44 @@ Before delivering:
 - the recommendation follows from the evidence
 - risks and counterarguments are included
 - the output makes a decision easier
+
+---
+
+## DD by Heart — Milestone Mapping (M1 Analiza rynku)
+
+Ten skill jest **primary tool dla M1** w procesie Venture Building w The Heart (12 non-negotiable milestones). Pełny framework: `/heart-vb-process`.
+
+### Definition of Done (M1)
+
+Output musi spełniać 3 wymiary (z dokumentu firmy):
+
+| Wymiar | Co znaczy |
+|---|---|
+| **A. Wiedza w slajdzie pitch decka** | TAM/SAM/SOM z realnymi danymi, 3-5 kluczowych trendów, wzrost YoY — wszystko czytelne na 1 slajdzie "Market" |
+| **B. Dokument jako suplement do data room** | Pełna analiza z metodologią + źródłami, do data room dla VC due diligence |
+| **C. Menadżer / founder umie o tym opowiadać** | W 3 minuty, bez slajdów — narrative musi się przyjąć żeby menadżer nie czytał z kartki w rozmowie z VC |
+
+### Check przed oznaczeniem M1 jako ✓
+
+- [ ] TAM (total addressable market) — global, w EUR/USD, z source
+- [ ] SAM (serviceable addressable market) — geografia + segment matching
+- [ ] SOM (serviceable obtainable market) — realistic 3-5 lat
+- [ ] 3-5 kluczowych trendów (regulatory, technological, demographic) — każdy z evidence
+- [ ] Wzrost YoY — historic 3-5 lat + forecast
+- [ ] Slajd "Market" w pitch deck'u draft (M11)
+- [ ] Menadżer może odpowiedzieć na 3 najczęstsze VC pytania o rynek bez Notion
+
+### Red flags (z dokumentu firmy)
+
+- 🚩 "Rynek 15 mld w Polsce" bez source (typowy oversize)
+- 🚩 "Rynek jest duży" bez liczb
+- 🚩 Top-down only (no bottom-up sanity check)
+- 🚩 Source > 3 lata stare bez aktualizacji
+- 🚩 TAM == SAM (założenie że "całkowity rynek = nasz rynek")
+
+### Connect to other milestones
+
+- **Po M1 done** → M2 Analiza konkurencji (`competitive-teardown`) — często paralelnie w tygodniach 1-2
+- **M1 + M2 razem** = wystarczające do M3 (early signal z inwestorami)
+- **M1 feeds M11** — slajd Market w pitch deck'u
+- **M1 inputs do M5** — SAM/SOM size używane do break-even calc
