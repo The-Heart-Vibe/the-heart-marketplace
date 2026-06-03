@@ -4,12 +4,17 @@
     "name": "The Heart Vibe",
     "url": "https://github.com/The-Heart-Vibe"
   },
-  "description": "Wewnętrzny marketplace pluginów Claude Code dla The Heart Vibe — venture builder toolkit z 36 skillami w jednym pluginie",
+  "description": "Wewnętrzny marketplace pluginów Claude Code (CLI/IDE + Claude Desktop Cowork) dla The Heart Vibe. Aligned z firmowym procesem Venture Building (DD by Heart — 12 non-negotiable milestones w 4 fazach). Aktualnie 2 pluginy: heart-vb (47 skilli, kompletny VB toolkit) i pptx-generator (branded .pptx decks + design system export).",
   "plugins": [
     {
       "name": "heart-vb",
       "source": "./plugins/heart-vb",
-      "description": "Venture Builder toolkit dla The Heart — 36 skilli w 8 kategoriach (council, self-improving, research, product, finance, commercial, comms, heart-custom). Jeden install, kompletne pokrycie od opportunity screening do IC memo."
+      "description": "Venture Builder toolkit dla The Heart — 47 skilli w 9 kategoriach (council, self-improving, vb-research, vb-product, vb-finance, vb-commercial, vb-comms, vb-process, heart-custom). Master orchestrator /heart-vb-process pokrywa wszystkie 12 milestones DD by Heart (Discovery → Creation → Validation → Fundraising). Jeden install, kompletne pokrycie od kickoffu do fundraisingu. Auto-loaded hooks działają w Claude Code CLI/IDE i Claude Desktop Cowork."
+    },
+    {
+      "name": "pptx-generator",
+      "source": "./plugins/pptx-generator",
+      "description": "Two-mode plugin: (1) generate branded .pptx decks z The Heart design system, (2) export design system jako Claude-Design-importable React + Tailwind repo. 2 skille: presentation-generator (deck creation z brand templates) i theheart-frontend (on-brand UI generation). Komplementarny dla M11 materiałów fundraisingowych z heart-vb."
     }
   ]
 }

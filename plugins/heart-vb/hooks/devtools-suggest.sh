@@ -11,7 +11,8 @@
 #
 # Output: appends additionalContext instructing Claude to use DevTools.
 #
-# Disable globally: remove from ~/.claude/settings.json hooks.UserPromptSubmit
+# Auto-loaded od v0.6.10 przez hooks/hooks.json w pluginie (Claude Code v2.1+ convention).
+# Disable globally: /plugin uninstall heart-vb lub edit hooks/hooks.json w plugin dir.
 # Override per-prompt: prefix with "BEZ DEVTOOLS:" / "NO DEVTOOLS:" / "USE WEBFETCH:"
 
 set -euo pipefail

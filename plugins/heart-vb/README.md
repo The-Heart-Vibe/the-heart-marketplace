@@ -84,9 +84,27 @@ Czyli: **gemini-cli i codex CLI działają w Cowork** (przez Pattern F workers),
 
 > **Cowork install:** w Cowork tab wpisz `/plugin marketplace add The-Heart-Vibe/claude-code-marketplace` → `/plugin install heart-vb@the-heart-vibe`. Hooki auto-load przy starcie sesji. Sprawdź stan przez `/heart-vb:status`.
 
+## Co MUSI być pre-installed (poza pluginem)
+
+Plugin install (`/plugin install heart-vb`) załatwia: **skille** + **hooki** (auto-load z `hooks/hooks.json` od v0.6.10). Wszystko działa "out of the box" dla większości funkcji.
+
+Ale dla pełnej funkcjonalności (Pattern E/F, milestone tracking, browser navigation) potrzebne są **zewnętrzne dependencies** które plugin install NIE załatwia — wymagają **manual terminal install** (Cowork sandbox nie pozwala na `npm install -g`, `curl ... | sh`):
+
+| Komponent | Status | Jak zainstalować | Co odblokuje |
+|---|---|---|---|
+| **`gemini-cli`** | **Strongly recommended** | `npm install -g @google/gemini-cli` → `gemini` (Google Workspace OAuth) | Pattern E multi-persona z Gemini, Pattern F voice #2, devtools-suggest hook (token saving) |
+| **`codex` CLI** | Optional (Tier 3) | Install Codex CLI + `codex login` (wymaga ChatGPT Plus €22/mc) | Pattern F voice #3 (full multi-LLM debate). Bez Codex Pattern F nadal działa jako 2-voice |
+| **`chrome-devtools-mcp`** | Recommended | `claude mcp add chrome-devtools npx chrome-devtools-mcp@latest` → restart sesji | devtools-suggest hook fully functional (token-efficient browsing dla G2/Crunchbase/LinkedIn) |
+| **Notion MCP connector** | Optional (od v0.7.1) | W Cowork UI: Settings → Connectors → Notion (OAuth). Lub CLI: `claude mcp add notion <package>` | `/heart-vb:status` milestone progress detection (X/12) z Project Card |
+| **`council` CLI binary** | Optional, **terminal-only** | `bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)` | Multi-LLM debate z terminala. **NIE działa z poziomu CC/Cowork** (self-invocation block) — Pattern F to alternatywa |
+
+> **Gotówa "minimum viable" konfiguracja:** `gemini-cli` zainstalowany w terminalu + plugin install w Cowork = pełen Pattern E + 2-voice Pattern F + większość workflow'ów. Pozostałe są nice-to-have.
+
+**Weryfikacja:** odpal `/heart-vb:status` po setup — pokaże tier readiness (1/2/3) + concrete fix commands jeśli czegoś brakuje.
+
 ## Co robi install.sh
 
-Plugin sam się instaluje przez `/plugin install` (skille + hooki). Install.sh dorabia **wyłącznie dependencies systemowe** dla council CLI, gemini-cli i chrome-devtools-mcp — rzeczy poza scope pluginu:
+Plugin sam się instaluje przez `/plugin install` (skille + hooki). Install.sh dorabia **wyłącznie dependencies systemowe** dla council CLI, gemini-cli i chrome-devtools-mcp — rzeczy poza scope pluginu. **install.sh MUSI być odpalony z macOS Terminal**, NIE z Cowork (sandbox blokuje system-level installs):
 
 1. Sprawdza/instaluje `uv` (Python package manager)
 2. Sprawdza Node.js (wymagany dla Gemini CLI)
