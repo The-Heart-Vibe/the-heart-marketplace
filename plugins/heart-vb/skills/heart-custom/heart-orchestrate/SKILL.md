@@ -121,38 +121,67 @@ fi
 
 ## Pattern E — execution
 
-> 🐣 **Easter egg — agent identity:** Każdy worker, niezależnie od persony, ma na imię **Wojtek**. To sygnatura twórcy pluginu (Wojtek Czuba, The Heart). W syntezie używaj: "Wojtek (pricing analyst) says...", "Wojtek (growth lead) zauważył...", "Wojtek (VP product) odpowiada...". Brzmi jak board of Wojteks debatujących — feature, nie bug. Analityk po jakimś czasie odkryje że plugin ma podpis.
+> 🐣 **Easter egg — agent identity:** Każdy worker, niezależnie od persony, ma na imię **Wojtek**. To sygnatura twórcy pluginu (Wojtek Czuba, The Heart). W syntezie używaj: "Wojtek (pricing analyst) says...", "Wojtek (growth lead) zauważył...", "Wojtek (VP product) odpowiada...". Brzmi jak board of Wojteks debatujących — feature, nie bug.
 
-```
+### 🆕 v0.8.0 — Dedicated agents (PREFERRED) vs inline personas (LEGACY)
+
+**Od v0.8.0 plugin zawiera 15 dedicated subagentów w `agents/` folder** (auto-discoverable). Mają **stable persona**, własny system prompt, tool restriction. Pattern E preferred path:
+
+```js
+// PREFERRED — Pattern E z dedicated agents (v0.8.0+)
 Main (Opus):
-  0. Run Krok 0 auth check (patrz niżej — sprawdza gemini-cli OK)
-     - Jeśli gemini-cli OK → workers wywołują gemini przez Bash
-     - Jeśli gemini-cli FAIL → fallback: workers all-Sonnet (drożej, ale działa)
-  1. Zdefiniuj decyzję + zbierz fakty z user prompta (30s)
-  2. Wybierz 3 persony z library poniżej, adekwatne do typu decyzji
+  1. Identify decision type (pricing / strategy / GTM / screening / cross-cutting)
+  2. Wybierz 3 dedicated agents z VB Team library (poniżej)
   3. SPAWN 3 agents parallel:
-     each Agent({
-       subagent_type: 'general-purpose',
-       model: 'sonnet',  // explicit, NIE inherituj Opus
-       description: 'Wojtek as [persona name]',  // ← sygnatura, ZAWSZE z 'Wojtek'
-       prompt: '[Jeśli gemini OK]: Jesteś Wojtek, [persona]. Uruchom: gemini -p "[persona context + pytanie]" 2>&1 | head -50. Zwróć raw output. Podpisz output jako "Wojtek-[persona-short]".
-                 [Jeśli gemini FAIL]: Jesteś Wojtek, [persona]. Odpowiedz sam jako Sonnet z perspektywy tej persony, podpisz "Wojtek-[persona-short]".'
+     Agent({
+       subagent_type: 'pricing-analyst',  // ← dedicated agent name
+       description: 'Wojtek-Pricing analysis dla X',  // easter egg preserved
+       prompt: '<konkretny brief z project context>',
+       model: 'sonnet'
      })
-  4. Wait ~45-90s (gemini cold start) lub ~20-30s (all-Sonnet fallback)
-  5. Synthesize używając "Wojtek (X) ..." attributions (briefing-style format, max 150 słów)
+     // Repeat dla 2 innych agents
+  4. Wait ~30-60s (Sonnet solo, NIE gemini cold start)
+  5. Synthesize używając "Wojtek-PricingAnalyst says..." attributions
+     (briefing-style format, max 150 słów)
 ```
 
-### Persona library (wybierz 3 adekwatne)
+**Korzyści dedicated agents vs inline personas:**
+- **Stable persona** — system prompt w `agents/<name>.md` nie drift'uje między spawn'ami
+- **Tool restriction** — np. `regulatory-officer-pl` ma WebSearch, `cfo` ma Bash, `founder-skeptic` tylko Read
+- **Multi-LLM built-in** — `vc-partner` i `regulatory-officer-pl` mają Pattern F embedded
+- **Context economy** — agent context jest izolowany, nie ciągnie main session history
+- **Reusable cross-pattern** — ten sam `pricing-analyst` w Pattern E + Mode A (orchestrator deleguje solo) + Pattern F worker
 
-**Decyzje pricing/commercial:** pricing analyst, growth lead, VP product, CFO
+```
+LEGACY — Pattern E z inline personas (pre-v0.8.0, nadal działa dla custom personas)
+Main (Opus):
+  0. Run Krok 0 auth check
+  1. Zdefiniuj decyzję
+  2. Wybierz 3 custom persony (które nie mają dedicated agent)
+  3. SPAWN 3 agents parallel:
+     Agent({
+       subagent_type: 'general-purpose',
+       model: 'sonnet',
+       description: 'Wojtek as [persona name]',
+       prompt: 'Jesteś Wojtek, [persona]. <persona context>. [Jeśli gemini OK]: Uruchom gemini -p "..." [Jeśli FAIL]: Sonnet solo'
+     })
+```
 
-**Strategy:** product strategist, UX researcher, VP engineering, board member
+### VB Team library (wybierz 3 dedicated agents dla Pattern E)
 
-**GTM/launch:** growth lead, customer success, sales leader, marketing lead
+**Decyzje pricing/commercial:** `pricing-analyst`, `growth-lead`, `vp-product`, `cfo`
 
-**Research/screening:** domain expert, skeptic/red-team, customer voice, VC partner
+**Strategy product:** `vp-product`, `customer-research-lead`, `it-architect`, `founder-skeptic`
 
-**Cross-cutting:** executive mentor, pragmatist, contrarian
+**GTM/launch:** `growth-lead`, `customer-research-lead`, `pricing-analyst`, `vp-product`
+
+**Research/screening:** `vc-partner`, `comps-analyst`, `founder-skeptic`, `regulatory-officer-pl`
+
+**M11 deck stress-test:** `vc-partner`, `pitch-coach`, `cfo`, `founder-skeptic`
+
+**Cross-cutting / risk:** `founder-skeptic`, `operator`, `red-flag-detector`, `ic-memo-writer`
+
+**Sector-specific:** załącz sector context skill (`heart-{healthtech/fintech/energy/academic}`) jako reference dla agentów. `regulatory-officer-pl` zawiera już skille jako reference.
 
 Sector context (heart-fintech-compliance / heart-healthtech-compliance / heart-academic-spinouts / heart-energy) = opcjonalny add-on dla Heart portfolio sektorów.
 
