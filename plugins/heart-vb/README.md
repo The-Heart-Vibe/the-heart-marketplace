@@ -26,14 +26,29 @@ I masz wszystko. Bez dodawania innych marketplaces.
 
 ## Gdzie plugin działa
 
-| Środowisko | Skille | Hooki (UserPromptSubmit) | Heart-orchestrate Pattern E/F | Council CLI |
-|---|---|---|---|---|
-| **Claude Code (CLI/IDE)** | ✅ przez `/plugin install` | ✅ auto-load z `hooks/hooks.json` | ✅ Agent tool spawn | ✅ terminal-only |
-| **Claude Desktop → Cowork tab** | ✅ przez `/plugin install` (w Cowork session) | ✅ auto-load z `hooks/hooks.json` (od v0.6.10) | ✅ Agent tool spawn | ❌ Cowork nie ma terminal — Pattern F to workaround |
-| **claude.ai (web)** | ❌ brak plugin support | ❌ | ❌ brak Agent tool | ❌ |
-| **Claude Desktop (standardowy chat)** | ⚠️ via MCP/Extensions | ❌ | ❌ | ❌ |
+| Środowisko | Skille | Hooki (UserPromptSubmit) | Heart-orchestrate Pattern E/F | Council CLI (binary) | Gemini/Codex CLI w Pattern F worker |
+|---|---|---|---|---|---|
+| **Claude Code (CLI/IDE)** | ✅ przez `/plugin install` | ✅ auto-load z `hooks/hooks.json` | ✅ Agent tool spawn | ❌ self-invocation block | ✅ przez `bash -c "gemini -p ..."` |
+| **Claude Desktop → Cowork tab** | ✅ przez `/plugin install` (w Cowork session) | ✅ auto-load z `hooks/hooks.json` (od v0.6.10) | ✅ Agent tool spawn | ❌ self-invocation block + sandbox | ✅ przez `bash -c "gemini -p ..."` |
+| **Terminal (standalone, poza CC)** | ❌ brak Agent tool | ❌ | ❌ brak orchestratora | ✅ działa natywnie | ✅ działa natywnie |
+| **claude.ai (web)** | ❌ brak plugin support | ❌ | ❌ brak Agent tool | ❌ | ❌ brak Bash |
+| **Claude Desktop (standardowy chat)** | ⚠️ via MCP/Extensions | ❌ | ❌ | ❌ | ❌ |
 
-> **Cowork install:** w Cowork tab wpisz `/plugin marketplace add The-Heart-Vibe/claude-code-marketplace` → `/plugin install heart-vb@the-heart-vibe`. Hooki auto-load przy starcie sesji.
+### Council CLI vs Pattern F — częsta konfuzja
+
+**`council` jako CLI binary NIE działa z poziomu Claude Code ani Cowork** (terminal-only), z dwóch powodów:
+
+1. **Self-invocation block** — council odpala `claude` jako jednego z 3 providers. Wewnątrz aktywnej Claude session `claude` CLI wykrywa nested invocation i odmawia. Council failuje przy pierwszym provider call.
+2. **Subprocess fork w sandbox** — Cowork ma per-session isolation; council jako standalone binary z multi-subprocess orchestracją źle koegzystuje z sandboxem.
+
+**Pattern F bypassuje obie sprawy** przez Agent tool isolation:
+- Zamiast jednego `council run ...` binary → 3 osobne `Agent({...})` calls
+- Każdy worker w isolated context, spawnuje 1 CLI (`bash -c "gemini -p ..."`, `bash -c "codex exec ..."`) lub używa Sonnet native
+- Self-invocation block nie pojawia się bo workery nie wywołują nested Claude — wywołują tylko gemini/codex
+
+Czyli: **gemini-cli i codex CLI działają w Cowork** (przez Pattern F workers), tylko `council` binary nie. Pattern F to pełna funkcjonalna alternatywa.
+
+> **Cowork install:** w Cowork tab wpisz `/plugin marketplace add The-Heart-Vibe/claude-code-marketplace` → `/plugin install heart-vb@the-heart-vibe`. Hooki auto-load przy starcie sesji. Sprawdź stan przez `/heart-vb:status`.
 
 ## Co robi install.sh
 
@@ -216,12 +231,24 @@ Loaderzy `--context` dla council + standalone reference podczas IC memo. **Dla s
 
 ## Diagnostyka
 
+### Z poziomu Claude Code / Cowork (rekomendowane)
+
+```
+/heart-vb:status
+```
+
+Self-diagnostic skill — wykrywa environment (CLI vs Cowork), wersję pluginu, status hooków, dependencies (gemini-cli, codex, chrome-devtools-mcp), auth providers, gotowość Pattern E/F (Tier 1/2/3). Read-only, bez konsumpcji tokenów. **Pierwsze co odpalić gdy plugin "nie działa".**
+
+### Z poziomu terminala (council binary only)
+
 ```bash
-council doctor                                       # status providerów
+council doctor                                       # status providerów (CLI tylko)
 council doctor --deep --provider gemini-cli          # live test (zużywa tokeny!)
 council version
 council config --show
 ```
+
+> Uwaga: `council doctor` failuje z poziomu CC/Cowork session — uruchom **bezpośrednio w terminalu**.
 
 ## Reinstalacja
 
