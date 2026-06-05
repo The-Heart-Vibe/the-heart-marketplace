@@ -16,7 +16,7 @@
 ## Setup (jeden install)
 
 ```
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install heart-vb@the-heart-marketplace
 ```
 

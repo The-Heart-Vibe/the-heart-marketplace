@@ -7,7 +7,7 @@
 Generates branded `.pptx` presentations from a topic or brief using The Heart / UZ Venture Studio templates.
 
 ```
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install pptx-generator@the-heart-marketplace
 ```
 

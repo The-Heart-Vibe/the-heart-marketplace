@@ -42,7 +42,7 @@ Jeden plugin `heart-vb` zawiera **36 skilli** w 8 kategoriach:
 W Claude Code:
 
 ```
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install heart-vb@the-heart-marketplace
 ```
 
@@ -59,7 +59,7 @@ Installer (run automatically) wykona w terminalu:
 
 Jeśli installer się nie uruchomił automatycznie:
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/the-heart-marketplace/main/plugins/heart-vb/install.sh)
 ```
 
 ---
@@ -391,4 +391,4 @@ Daj znać:
 - Brakuje skill dla konkretnego use case?
 - Sector context (heart-custom) działa czy zbyt powierzchowny?
 
-Issue lub PR: https://github.com/The-Heart-Vibe/claude-code-marketplace
+Issue lub PR: https://github.com/The-Heart-Vibe/the-heart-marketplace

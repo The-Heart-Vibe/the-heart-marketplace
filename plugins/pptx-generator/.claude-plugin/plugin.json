@@ -5,7 +5,7 @@
   "author": {
     "name": "The Heart Vibe"
   },
-  "repository": "https://github.com/The-Heart-Vibe/claude-code-marketplace",
+  "repository": "https://github.com/The-Heart-Vibe/the-heart-marketplace",
   "license": "MIT",
   "skills": [
     "./skills/presentation-generator",

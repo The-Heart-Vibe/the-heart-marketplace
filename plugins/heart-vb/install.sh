@@ -55,7 +55,7 @@ cat > "$WRAPPER" <<EOF
 VENV="\${COUNCIL_VENV:-$VENV}"
 if [ ! -x "\$VENV/bin/council" ]; then
   echo "ERROR: council not found at \$VENV/bin/council" >&2
-  echo "Re-run installer: bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)" >&2
+  echo "Re-run installer: bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/the-heart-marketplace/main/plugins/heart-vb/install.sh)" >&2
   exit 1
 fi
 exec "\$VENV/bin/council" "\$@"

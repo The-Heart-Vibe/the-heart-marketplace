@@ -20,7 +20,7 @@ Two repos, two roles:
 | Repo | Role |
 |---|---|
 | **theheart-design-system** — https://github.com/wojtekczuba/theheart-design-system | The canonical React + Tailwind design system. `tokens.json`, `tailwind.preset.cjs`, `src/tokens/tokens.css`, `src/components/`, `src/patterns/`, `src/icons/`, `src/logos/`. Pull from here. |
-| **The-Heart-Vibe/claude-code-marketplace** (`plugins/pptx-generator`) | Source plugin that *generates* the design system. Edit `brand.yaml` and widgets here, then re-export. |
+| **The-Heart-Vibe/the-heart-marketplace** (`plugins/pptx-generator`) | Source plugin that *generates* the design system. Edit `brand.yaml` and widgets here, then re-export. |
 
 The instructional brand toolkit (Pitch Deck Toolkit) is the
 human-readable spec. It is distributed as a **PDF** (the original

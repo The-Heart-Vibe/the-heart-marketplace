@@ -3,7 +3,7 @@
 **Jedna instalacja, kompletny VB stack.** 36 skilli w 8 kategoriach pod jednym pluginem.
 
 ```
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install heart-vb@the-heart-marketplace
 ```
 
@@ -82,7 +82,7 @@ Discovery (1-5) → Creation (6-8) → Validation (9-10) → Fundraising (11-12)
 
 Czyli: **gemini-cli i codex CLI działają w Cowork** (przez Pattern F workers), tylko `council` binary nie. Pattern F to pełna funkcjonalna alternatywa.
 
-> **Cowork install:** w Cowork tab wpisz `/plugin marketplace add The-Heart-Vibe/claude-code-marketplace` → `/plugin install heart-vb@the-heart-marketplace`. Hooki auto-load przy starcie sesji. Sprawdź stan przez `/heart-vb:status`.
+> **Cowork install:** w Cowork tab wpisz `/plugin marketplace add The-Heart-Vibe/the-heart-marketplace` → `/plugin install heart-vb@the-heart-marketplace`. Hooki auto-load przy starcie sesji. Sprawdź stan przez `/heart-vb:status`.
 
 ## Co plugin install załatwia automatycznie
 
@@ -103,7 +103,7 @@ Dla pełnej funkcjonalności (Pattern E/F multi-LLM, milestone tracking) potrzeb
 | **`gemini-cli`** | **Strongly recommended** | `npm install -g @google/gemini-cli` → `gemini` (Google Workspace OAuth) | Pattern E multi-persona z Gemini, Pattern F voice #2 |
 | **`codex` CLI** | Optional (Tier 3) | Install Codex CLI + `codex login` (wymaga ChatGPT Plus €22/mc) | Pattern F voice #3 (full multi-LLM debate). Bez Codex Pattern F nadal działa jako 2-voice |
 | **Notion MCP connector** | Optional (od v0.7.1) | W Cowork UI: Settings → Connectors → Notion (OAuth). Lub CLI: `claude mcp add notion <package>` | `/heart-vb:status` milestone progress detection (X/12) z Project Card |
-| **`council` CLI binary** | Optional, **terminal-only** | `bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)` | Multi-LLM debate z terminala. **NIE działa z poziomu CC/Cowork** (self-invocation block) — Pattern F to alternatywa |
+| **`council` CLI binary** | Optional, **terminal-only** | `bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/the-heart-marketplace/main/plugins/heart-vb/install.sh)` | Multi-LLM debate z terminala. **NIE działa z poziomu CC/Cowork** (self-invocation block) — Pattern F to alternatywa |
 
 > **Minimum viable konfiguracja:** `gemini-cli` zainstalowany w terminalu + plugin install w Cowork = pełen Pattern E + 2-voice Pattern F + chrome-devtools auto-loaded. Pozostałe są nice-to-have.
 
@@ -113,7 +113,7 @@ Dla pełnej funkcjonalności (Pattern E/F multi-LLM, milestone tracking) potrzeb
 
 ```
 # W Claude Desktop → Cowork tab:
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install heart-vb@the-heart-marketplace
 
 # Restart Cowork tab (zamknij + otwórz)
@@ -139,12 +139,12 @@ claude --version
 # 3. Dodaj marketplace + zainstaluj plugin
 claude
 # W interactive prompt:
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install heart-vb@the-heart-marketplace
 /exit
 
 # 4. Odpal install.sh dla pełnego setup'u (gemini-cli + council CLI + verify chrome-devtools)
-bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/the-heart-marketplace/main/plugins/heart-vb/install.sh)
 
 # 5. (Jeśli installer pyta) Authorize gemini przez browser
 gemini
@@ -183,7 +183,7 @@ Plugin sam się instaluje przez `/plugin install` (skille + hooki). Install.sh d
 ### Ręczne uruchomienie installer
 
 ```bash
-bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/the-heart-marketplace/main/plugins/heart-vb/install.sh)
 ```
 
 ### Override paths
@@ -444,7 +444,7 @@ council config --show
 # 3. Restart Claude Code lub Cowork tab — hooks/hooks.json loaduje się przy starcie
 
 # 4. (Tylko jeśli przechodzisz z ≤v0.6.9) — cleanup legacy hooks
-bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/claude-code-marketplace/main/plugins/heart-vb/install.sh)
+bash <(curl -s https://raw.githubusercontent.com/The-Heart-Vibe/the-heart-marketplace/main/plugins/heart-vb/install.sh)
 
 # 5. Verify
 /heart-vb:status

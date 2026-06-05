@@ -5,7 +5,7 @@
 Two-mode plugin for The Heart brand. One source of truth (`brand.yaml` + Python widgets) drives both outputs.
 
 ```
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install pptx-generator@the-heart-marketplace
 ```
 

@@ -7,7 +7,7 @@ Wewnętrzny marketplace pluginów Claude Code dla zespołu The Heart Vibe.
 ## 🚀 Quick start
 
 ```
-/plugin marketplace add The-Heart-Vibe/claude-code-marketplace
+/plugin marketplace add The-Heart-Vibe/the-heart-marketplace
 /plugin install heart-vb@the-heart-marketplace
 ```
 
