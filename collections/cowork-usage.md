@@ -2,7 +2,37 @@
 
 **TL;DR: nie musisz nic dodawać do każdego prompta.** Pisz normalnie — model sam widzi wszystkie skille i agentów heart-vb i dobiera właściwy. Ta instrukcja pokazuje 3 wzorce użycia od najprostszego do najbardziej "sterowanego".
 
-> **Kontekst techniczny:** W Cowork plugin działa **bez auto-hooków** (Cowork blokuje pluginy z shell hookami ze względów bezpieczeństwa). Hooki w CLI robiły proaktywny "💡 użyj skilla X" przy każdym prompcie. W Cowork tego nudge'a nie ma — ale skille i agenci działają normalnie, bo model widzi ich opisy i sam je wywołuje. Różnica: musisz być odrobinę bardziej konkretny, jeśli model nie trafi za pierwszym razem.
+---
+
+## Najpierw — 3 środowiska Claude (gdzie co działa)
+
+Łatwo się pogubić bo "Claude Code", "CLI" i "Cowork" brzmią podobnie. W rzeczywistości są **dwa silniki**:
+
+| Środowisko | Co to | Silnik | Plugin heart-vb |
+|---|---|---|---|
+| **Claude Code — CLI** | `claude` w Terminalu | Claude Code | ✅ Pełny (hooki, agenci, skille, council CLI) |
+| **Claude Code — IDE** | rozszerzenie w VSCode / Cursor | Claude Code (ten sam silnik co CLI) | ✅ Pełny (identycznie jak CLI) |
+| **Claude Desktop — Cowork** | zakładka Cowork w aplikacji Claude Desktop | Claude Code, ale **w sandboxie** | ⚠️ Skille + agenci ✅, **bez auto-hooków** |
+| ~~claude.ai (web)~~ | przeglądarka | — | ❌ Brak wsparcia pluginów w ogóle |
+
+**Kluczowy wniosek:**
+- **"Claude Code" = CLI + IDE** — ten sam silnik, te same możliwości, **pełne hooki**. To jest środowisko z największą funkcjonalnością (auto-suggest, cross-session memory, council CLI z terminala).
+- **"Cowork" = osobna zakładka w Desktop** — używa silnika Claude Code, ale działa w sandboxie per-sesja. Z bezpieczeństwa **nie pozwala na plugin-shipped shell hooki**, więc heart-vb działa tam bez auto-suggest (ale skille i agenci w pełni).
+
+### Co wybrać do czego
+
+| Praca | Rekomendowane środowisko | Dlaczego |
+|---|---|---|
+| Długoterminowy projekt VB (tygodnie) | **Claude Code CLI/IDE** | Cross-session memory (si:*), pełne auto-hooki, council CLI |
+| Szybkie zadanie / pojedyncza analiza | **Cowork** | Wygodny UI, mniej frykcji, dependencies dziedziczone z CLI |
+| Pojedyncza decyzja (Pattern E/F) | Dowolne | Działa wszędzie gdzie plugin zainstalowany |
+| Portfolio / cross-venture analiza | **Claude Code CLI** | Cross-session learnings, bi-weekly cadence |
+
+> **Dependencies (gemini-cli, codex, council) instalujesz raz w Terminalu** — są system-level, więc Cowork je dziedziczy. Sam plugin (skille+agenci) instalujesz przez `/plugin install` w obu środowiskach niezależnie.
+
+---
+
+> **Kontekst techniczny (dlaczego Cowork bez hooków):** Cowork to autonomous-agent sandbox. Plugin-shipped shell hooki (skrypty `.sh` odpalane przy każdym prompcie) to injection/RCE vector w środowisku gdzie agent działa samodzielnie — więc Cowork ukrywa pluginy które je shippują. CLI pozwala (user kontroluje terminal). Hooki w CLI robiły proaktywny "💡 użyj skilla X" przy każdym prompcie. W Cowork tego nudge'a nie ma — ale skille i agenci działają normalnie, bo model widzi ich opisy i sam je wywołuje. Różnica: musisz być odrobinę bardziej konkretny, jeśli model nie trafi za pierwszym razem.
 
 ---
 
