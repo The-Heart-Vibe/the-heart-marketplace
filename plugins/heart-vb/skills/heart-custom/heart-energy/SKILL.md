@@ -10,6 +10,8 @@ description: "Context dla ventures w szeroko rozumianej branży energetycznej w 
 
 Loader kontekstu dla ventures w **całej branży energetycznej** (nie tylko storage) — Polska + EU.
 
+> 🌍 **Scope: PL + EU.** Regulator stack tu (URE, PSE, EU Battery Reg, EU ETS, RED III) dotyczy Polski/UE. Venture na US/inny rynek → **flaguj inny reżim** (np. FERC + lokalne rynki mocy zamiast URE/PSE) i NIE ekstrapoluj.
+
 > **Scope:** generation (OZE, nuclear, gas) → transmission/distribution (PSE/DSO) → storage (BESS, V2G) → consumption (industrial, residential, transport) → services (PPA, demand response, energy management software). Cleantech adjacent: H2 economy, CCS, energy efficiency, heat pumps, district heating.
 
 ## Sub-segmenty branży (Heart watchlist)

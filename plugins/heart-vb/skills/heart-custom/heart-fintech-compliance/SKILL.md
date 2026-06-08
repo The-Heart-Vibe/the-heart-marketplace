@@ -10,6 +10,8 @@ description: "Load FinTech regulatory context for The Heart ventures (KNF, AMLD6
 
 Loader kontekstu regulacyjnego dla FinTech ventures The Heart. Używaj jako `--context` dla council, lub jako standalone reference przy IC memo / pricing decisions.
 
+> 🌍 **Scope: PL + EU.** Akty tu (KNF, PSD2, MIFID2, AMLD6, RODO) dotyczą Polski/UE. Venture na US/UK/APAC → **flaguj inny reżim** (np. SEC/FINRA/FCA/MAS zamiast KNF) i NIE ekstrapoluj tych regulacji.
+
 ## Polski / EU regulator stack dla FinTech
 
 | Akt | Co reguluje | Kiedy ma znaczenie dla The Heart |

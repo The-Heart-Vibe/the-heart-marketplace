@@ -10,6 +10,8 @@ description: "Load HealthTech regulatory context for The Heart ventures (MDR, RO
 
 Loader kontekstu regulacyjnego dla HealthTech ventures The Heart.
 
+> 🌍 **Scope: PL + EU.** Akty i rejestry tu (MDR, RODO, NFZ, IRB) dotyczą Polski/UE. Venture na US/UK/APAC → **flaguj że to inny reżim** (np. FDA 510(k)/De Novo zamiast MDR, HIPAA zamiast RODO) i NIE ekstrapoluj tych regulacji — to byłby confidently-wrong.
+
 ## Polski / EU regulator stack dla HealthTech
 
 | Akt | Co reguluje | Kiedy ma znaczenie |

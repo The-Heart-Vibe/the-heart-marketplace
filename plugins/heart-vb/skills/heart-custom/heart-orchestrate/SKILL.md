@@ -256,6 +256,7 @@ start_process(command: "cd ~/ && codex exec --skip-git-repo-check '<fact>' 2>&1 
 - **GNU `timeout` NIE istnieje** w shellu DC (macOS) — NIE używaj `timeout 120 ...`; bound przez `timeout_ms` w `start_process`.
 - **PATH DC ≠ login shell** — `council` (~/.local/bin) bywa niewidoczny; wołaj gemini/codex bezpośrednio, nie przez council.
 - **Escape user input** do `-p '...'` (single-quote literal) — injection vector.
+- **gemini OAuth wygasa** → `gemini -p` czeka na re-auth prompt którego w trybie headless nikt nie obsłuży → hang do timeout (worker = MISSING). Jak Pattern F nagle "gemini MISSING" bez powodu → user musi odpalić `gemini` raz w terminalu i re-auth.
 
 ---
 

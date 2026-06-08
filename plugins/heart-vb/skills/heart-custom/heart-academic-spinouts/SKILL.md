@@ -10,6 +10,8 @@ description: "Context dla ventures budowanych z polskimi uczelniami i instytutam
 
 Loader kontekstu dla ventures wywodzących się z polskiego systemu akademickiego — tech transfer, IP, funding, cooperation patterns.
 
+> 🌍 **Scope: PL.** Tech-transfer, IP ownership i funding paths tu (NCBR/NCN, ustawa o szkolnictwie wyższym, modele uczelnia-spółka) są **polskie**. Spinout z US/UK uczelni → inny reżim (np. Bayh-Dole US, inne grant bodies, inne IP defaults) — NIE ekstrapoluj polskich zasad.
+
 ## Polski landscape akademicki dla VB
 
 ### Główni gracze (top tier research)

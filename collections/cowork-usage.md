@@ -201,6 +201,14 @@ Remove+re-add wymusza świeży re-scan, ale też podlega cooldownowi.
 
 ---
 
+## Znane ograniczenia (monitoruj)
+
+- 🌍 **Plugin jest PL/EU-centryczny.** Regulacje, fundusze, rynki (KNF, NFZ, URE, MDR, NCBR) dotyczą Polski/UE. Dla venture US/UK/APAC plugin **flaguje że to inny reżim** zamiast ekstrapolować — ale zweryfikuj z lokalnym doradcą. Confidently-wrong regulacja jest gorsza niż "to nie mój rynek".
+- 🔑 **gemini OAuth wygasa** → Pattern F pokazuje nagle "gemini MISSING" bez powodu. Fix: odpal `gemini` raz w terminalu, zaloguj ponownie, wróć do Coworka.
+- 🔔 **Nudge fatigue:** cross-check + consent + CORE przypominają o weryfikacji często. Jeśli zaczynasz to ignorować — to sygnał, nie wada. Powiedz, a zawęzimy nudge cross-check tylko do M6/M11 (exit/deck) zamiast wszędzie.
+
+---
+
 ## Najprostsza rekomendacja dla pracownika
 
 1. **Szybkie zadanie** → pisz naturalnie (Wzorzec 1)
