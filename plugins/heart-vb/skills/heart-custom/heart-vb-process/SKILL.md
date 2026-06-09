@@ -61,7 +61,7 @@ User pisze coś specyficznego dla pojedynczego milestone'a → wykryj który mil
 | "MVP", "prototyp", "demo", "roadmapa produktowa", "milestones produktu" | **M8** | `vb-product/product-strategist` |
 | "LOI", "pilot agreement", "pricing potwierdzony", "willingness to pay", "5 klientów chce" | **M9** | `vb-commercial/pricing-strategist` |
 | "IP", "patent", "regulatory", "CE/FDA", "MDR", "AML", "legal red flags" | **M10** | `heart-dd-checklist` + sector context |
-| "pitch deck", "IC memo", "one-pager", "data room", "model finansowy 3Y" | **M11** | `heart-pitch-deck` lub `board-prep` lub `financial-analyst` |
+| "pitch deck", "IC memo", "one-pager", "data room", "model finansowy 3Y" | **M11** | `heart-pitch-deck` lub `board-prep` lub `financial-analyst` → po gotowej treści `heart-deck-handoff` (wizualny deck przez Claude Design) |
 | "lista inwestorów", "outreach plan", "intro do funduszy", "CRM funduszy" | **M12** | `vb-comms/investor-outreach` |
 
 **KROK -1 (consent gate, jak heart-orchestrate):** jeśli wykryto milestone i jest dedicated sub-skill, spytaj user'a plain language:

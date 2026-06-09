@@ -58,7 +58,7 @@ Recommended flow:
 11. use of funds / milestones
 12. appendix
 
-If the user wants a web-native deck, pair this skill with `frontend-slides`.
+If the user wants a web-native deck, pair this skill with `frontend-slides`. Dla wizualnego decka z gotowej treści przez **Claude Design** (brand The Heart) → `heart-deck-handoff`.
 
 ### One-Pager / Memo
 - state what the company does in one clean sentence

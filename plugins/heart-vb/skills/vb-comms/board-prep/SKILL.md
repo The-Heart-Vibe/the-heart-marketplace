@@ -159,6 +159,10 @@ The next board prep starts now.
 
 ---
 
+## Visual handoff
+
+Gdy gotowy deck / narrative pre-read ma być **wizualnie złożony** → **`heart-deck-handoff`** (consent KROK -1): pakuje treść w brief dla Claude Design (brand The Heart). Nie re-litiguj treści w briefie — była ustalona tutaj.
+
 ## 🤝 Agent-bliźniak
 
 Ten skill ma agenta-bliźniaka: **`pitch-coach`** — spawn jako synthesis agent / ic-memo-writer dla IC memo.

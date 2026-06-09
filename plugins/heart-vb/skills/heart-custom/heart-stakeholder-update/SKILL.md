@@ -101,6 +101,7 @@ Markdown 1-2 stronic z sekcjami above. Zachowaj TL;DR na samym górze. Bullet po
 Po wyjściu update możesz:
 - `stress-test` żeby check czy nie pomijasz red flags
 - `board-prep` jeśli wraz z update planujesz IC meeting
+- `heart-deck-handoff` jeśli update ma trafić jako slajdy (board deck) → brief dla Claude Design
 - `investor-outreach` jeśli update prowadzi do follow-up rozmów
 
 Output = gotowy do wysłania update jako markdown / plain text email.

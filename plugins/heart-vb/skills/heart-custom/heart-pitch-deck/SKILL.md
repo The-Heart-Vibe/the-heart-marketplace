@@ -99,6 +99,8 @@ Gdy ktoś prosi o **poprawić istniejący deck**:
 
 Output to deck **outline + content per slide**. NIE generuję faktycznych .pptx — to artifact tools / external designer job.
 
+→ Żeby zrobić **wizualne slajdy** z gotowego outline'u: **`heart-deck-handoff`** (pakuje go w brief dla Claude Design + brand The Heart; consent KROK -1). Alternatywa: `pptx-generator` dla sztywnego branded .pptx.
+
 ---
 
 ## DD by Heart — Milestone Mapping (M11 Materiały fundraisingowe — pitch deck part)
